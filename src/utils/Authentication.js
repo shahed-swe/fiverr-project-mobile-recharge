@@ -16,8 +16,10 @@ export const isLoggedin = (requestedRole) => {
             // }
             return true
 
+        }else{
+
+            return false
         }
-        return false
     } catch (err) {
         localStorage.removeItem("token")
         return false;

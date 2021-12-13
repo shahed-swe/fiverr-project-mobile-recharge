@@ -1,0 +1,7 @@
+@import '../../colors.scss';
+.active {
+    border-bottom: 3px solid $red !important;
+    .nav-link {
+        color: $red !important;
+    }
+}

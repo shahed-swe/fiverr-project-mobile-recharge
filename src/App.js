@@ -5,9 +5,9 @@ import {
   Route,
 } from 'react-router-dom';
 
-
+// components
 import Login from './pages/auth/Login';
-
+import Register from './pages/auth/Register';
 
 
 // extra components
@@ -21,6 +21,7 @@ const App = () => {
         <ScrollToTop>
           <Switch>
             <Route exact path="/" component={Login} />
+            <Route exact path="/register" component={Register} />
           </Switch>
         </ScrollToTop>
       </Router>
