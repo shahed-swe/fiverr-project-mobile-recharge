@@ -1,12 +1,14 @@
 import { isLoggedin } from '../../utils/Authentication';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { DangerButton } from '../button/index';
 import './style.scss'
 
-export const Navbar = () => {
 
+export const Navbar = () => {
+    // checking logged in or not
     const loggedin = isLoggedin()
-    console.log(loggedin)
+
 
 
     const style = {
@@ -19,7 +21,9 @@ export const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light p-3">
             <div className='container d-flex'>
-                <div className="navbar-brand">Navbar</div>
+                <div className="navbar-brand">
+                    <FontAwesomeIcon icon={faHome} className='text-danger' size="lg"/>
+                </div>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto">
