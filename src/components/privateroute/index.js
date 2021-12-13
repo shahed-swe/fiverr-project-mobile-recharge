@@ -1,6 +1,5 @@
-
 import { Route, Redirect } from 'react-router-dom'
-import { isLoggedin } from '../../utils/Authenticate'
+import { isLoggedin } from '../../utils/Authentication'
 
 const RoleBasedRouting = ({ component: Component, role, ...rest }) => {
     return (

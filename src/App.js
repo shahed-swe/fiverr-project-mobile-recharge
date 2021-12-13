@@ -12,7 +12,7 @@ import Login from './pages/auth/Login';
 
 // extra components
 import ScrollToTop from './components/scrollTop/index';
-import RoleBaseRoute from './components/privateroute/index'
+// import RoleBaseRoute from './components/privateroute/index'
 
 const App = () => {
   return (
@@ -27,3 +27,5 @@ const App = () => {
     </div>
   )
 }
+
+export default App;
