@@ -9,6 +9,8 @@ import {
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 
+// home page
+import Home from './pages/home/index'
 
 // extra components
 import ScrollToTop from './components/scrollTop/index';
@@ -22,6 +24,7 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/home" component={Home}/>
           </Switch>
         </ScrollToTop>
       </Router>

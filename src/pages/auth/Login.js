@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom'
 import { LoginForm } from '../../components/form/loginForm'
 import { Container } from '../../components/container'
 import { Navbar } from '../../components/navbar/index' 
+import { Footer } from '../../components/footer/index'
 // styles
 import './style.scss'
 
@@ -18,7 +19,7 @@ const Login = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('token')
-        if (token) history.push('/')
+        if (token) history.push('/home')
     }, [history])
 
 
@@ -50,6 +51,7 @@ const Login = () => {
                 </Container.Row>
             </Container.Basic>
         </div>
+            <Footer />
         </div>
     )
 }

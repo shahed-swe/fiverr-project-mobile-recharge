@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom'
 // created components
 import { RegistrationForm } from '../../components/form/registrationForm'
 import { Container } from '../../components/container'
+import { Navbar } from '../../components/navbar/index' 
 
 // styles
 import './style.scss'
@@ -18,7 +19,7 @@ const Register = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('token')
-        if (token) history.push('/')
+        if (token) history.push('/home')
     }, [history])
 
 
@@ -32,6 +33,9 @@ const Register = () => {
     }
 
     return (
+        <div>
+            <Navbar/>
+        
         <div className='auth-container'>
             <Container.Basic>
                 <Container.Row>
@@ -46,6 +50,7 @@ const Register = () => {
                     </Container.Column>
                 </Container.Row>
             </Container.Basic>
+        </div>
         </div>
     )
 }
