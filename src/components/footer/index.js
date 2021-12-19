@@ -1,8 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faUser, faCreditCard, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { Text } from "../text/Text"
-import FooterImage from  '../../assets/footerimage.png'
 
+// images
+import FooterImage from '../../assets/footerimage.png'
+import Store from '../../assets/store.svg'
+import Group from '../../assets/group.svg'
+
+// styles
 import './style.scss'
 
 
@@ -46,7 +51,7 @@ export const Footer = (props) => {
                         </div>
                         <div className="col-lg-6">
                             <div class="input-group">
-                                <input type="text" class="form-control col-8 shadow-none rounded-pill input-extra-design" placeholder="Email here" aria-label="Example text with button addon" aria-describedby="button-addon1"/>
+                                <input type="text" class="form-control col-8 shadow-none rounded-pill input-extra-design" placeholder="Email here" aria-label="Example text with button addon" aria-describedby="button-addon1" />
                                 <div class="input-group-prepend bg-danger button-extra-style extra-rounded">
                                     <div class="button-extra-style__inside text-white border-0 shadow-none pt-1" type="button" id="button-addon1">Send</div>
                                 </div>
@@ -60,24 +65,26 @@ export const Footer = (props) => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item">
-                                <div className="nav-link fs-18" href="#">About Us</div>
+                                <div className="nav-link fs-18">About Us</div>
                             </li>
                             <li className="nav-item">
-                                <div className="nav-link fs-18" href="#">Help</div>
+                                <div className="nav-link fs-18">Help</div>
                             </li>
                             <li className="nav-item">
-                                <div className="nav-link fs-18" href="#">How to Sent top up</div>
+                                <div className="nav-link fs-18">How to Sent top up</div>
                             </li>
                             <li className="nav-item">
-                                <div className="nav-link fs-18" href="#">News</div>
+                                <div className="nav-link fs-18">News</div>
                             </li>
                             <li className="nav-item">
-                                <div className="nav-link fs-18" href="#">Services</div>
+                                <div className="nav-link fs-18">Services</div>
                             </li>
                         </ul>
                         <form className="form-inline my-2 my-lg-0">
-                            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            <div classname="footer-image">
+                                <img src={Store} className='img-fluid' alt="" width={160} height={50}/>
+                                <img src={Group} className='img-fluid' alt="" width={160} height={50}/>
+                            </div>
                         </form>
                     </div>
                 </nav>

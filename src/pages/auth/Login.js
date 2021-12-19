@@ -24,12 +24,8 @@ const Login = () => {
 
 
     const login = async (data) => {
-        clearErrors()
-        setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-        }, 3000)
-        console.log(data)
+        localStorage.setItem('token', data.email)
+        history.push('/home')
     }
 
     return (

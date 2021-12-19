@@ -2,20 +2,25 @@ import { isLoggedin } from '../../utils/Authentication';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { DangerButton } from '../button/index';
+import { useHistory } from 'react-router-dom'
 import './style.scss'
 
 
 export const Navbar = () => {
     // checking logged in or not
     const loggedin = isLoggedin()
-
-
+    const history = useHistory()
 
     const style = {
         button: {
             margin: 0,
             padding: 0,
         }
+    }
+
+    const handleLogout = () => {
+        localStorage.removeItem('token')
+        history.push('/')
     }
 
     return (
@@ -30,6 +35,10 @@ export const Navbar = () => {
                         <li className="nav-item active ml-3">
                             <div className="nav-link">Mobile Top Up<span className="sr-only">(current)</span></div>
                         </li>
+                        {loggedin ? 
+                        <li className="nav-item ml-3" onClick={handleLogout}>
+                            <div className="nav-link">Logout</div>
+                        </li>: null}
                         {!loggedin?
                             <>
                                 <li className="nav-item ml-3">
@@ -41,7 +50,7 @@ export const Navbar = () => {
                             </>
                             : null}
                         <DangerButton className="nav-item rounded-pill ml-3" style={style.button}>
-                            <div className="nav-link pl-4 pr-4 text-white">Contact Us <span className="sr-only">(current)</span></div>
+                            <div className="nav-link pl-4 pr-4 text-white"><span className='text-white'>Contact Us</span> </div>
                         </DangerButton>
                     </ul>
                 </div>
