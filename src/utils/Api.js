@@ -1,0 +1,1 @@
+export const Api = "https://bexwal.wa.bwx.walbex.com/api"
