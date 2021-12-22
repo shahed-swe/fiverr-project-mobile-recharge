@@ -2,7 +2,7 @@ import { isLoggedin } from '../../utils/Authentication';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { DangerButton } from '../button/index';
-import { useHistory } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import './style.scss'
 
 
@@ -20,33 +20,33 @@ export const Navbar = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('token')
-        history.push('/')
+        history.push('/login')
     }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light p-3">
             <div className='container d-flex'>
                 <div className="navbar-brand">
-                    <FontAwesomeIcon icon={faHome} className='text-danger' size="lg"/>
+                    <FontAwesomeIcon icon={faHome} className='text-danger' size="lg" />
                 </div>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item active ml-3">
-                            <div className="nav-link">Mobile Top Up<span className="sr-only">(current)</span></div>
-                        </li>
-                        {loggedin ? 
-                        <li className="nav-item ml-3" onClick={handleLogout}>
-                            <div className="nav-link">Logout</div>
-                        </li>: null}
-                        {!loggedin?
+                        <NavLink activeClassName='active' className="nav-item ml-3" to="/">
+                            <div className="nav-link">Mobile Top Up</div>
+                        </NavLink>
+                        {loggedin ?
+                            <li className="nav-item ml-3" onClick={handleLogout} >
+                                <div className="nav-link">Logout</div>
+                            </li> : null}
+                        {!loggedin ?
                             <>
-                                <li className="nav-item ml-3">
-                                    <div className="nav-link">Login<span className="sr-only">(current)</span></div>
-                                </li>
-                                <li className="nav-item ml-3">
-                                    <div className="nav-link">Registration<span className="sr-only">(current)</span></div>
-                                </li>
+                                <NavLink activeClassName='active' className="nav-item ml-3" to="/register">
+                                    <div className="nav-link">Registration</div>
+                                </NavLink>
+                                <NavLink activeClassName='active' className="nav-item ml-3" to="/login">
+                                    <div className="nav-link">Login</div>
+                                </NavLink>
                             </>
                             : null}
                         <DangerButton className="nav-item rounded-pill ml-3" style={style.button}>

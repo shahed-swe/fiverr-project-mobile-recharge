@@ -6,14 +6,15 @@ import { FormGroup } from '../formGroup/index'
 import { Card } from '../card/index'
 import { DangerButton } from '../button/index'
 import { Form } from 'react-bootstrap'
+import {isValidEmail} from '../../utils/_heplers'
+
 
 export const RegistrationForm = (props) => {
     const { handleSubmit, onSubmit, errors, isLogging, register } = props;
     const [show, setShow] = useState(false);
-    const [activated, setActivated] = useState(null)
 
     return (
-        <Card.Simple className="shadow-none border-0 p-4">
+        <Card.Simple className="shadow-none border border-danger p-4">
             <Card.Header className="bg-white px-0 text-center border-0">
                 <Text className="fs-20 font-weight-bolder mb-1">Sign In</Text>
                 <div>
@@ -27,49 +28,54 @@ export const RegistrationForm = (props) => {
                 <form onSubmit={handleSubmit(onSubmit)}>
 
 
-                    {/* First Name */}
+                    {/* User Name */}
                     <FormGroup>
-                        {errors.first_name && errors.first_name.message ?
-                            <Text className="text-danger fs-13 mb-1">{errors.first_name && errors.first_name.message}</Text> :
-                            <Text className="text-capitalize fs-13 mb-1 text-danger text-bold">First Name</Text>
+                        {errors.name && errors.name.message ?
+                            <Text className="text-danger fs-13 mb-1">{errors.name && errors.name.message}</Text> :
+                            <Text className="text-capitalize fs-13 mb-1 text-danger text-bold"> User Name</Text>
                         }
 
                         <input
                             type="text"
-                            className={errors.first_name ? "form-control shadow-none error" : "form-control border border-danger shadow-none"}
-                            placeholder="First Name"
-                            {...register("first_name", { required: "E-mail or Phone is required" })}
+                            className={errors.name ? "form-control shadow-none error" : "form-control border border-danger shadow-none"}
+                            placeholder="User Name"
+                            {...register("name", { required: "Username is required" })}
                         />
                     </FormGroup>
 
 
-                    {/* last Name */}
+                    {/* Sur Name */}
                     <FormGroup>
-                        {errors.last_name && errors.last_name.message ?
-                            <Text className="text-danger fs-13 mb-1">{errors.last_name && errors.last_name.message}</Text> :
-                            <Text className="text-capitalize fs-13 mb-1 text-danger text-bold">First Name</Text>
+                        {errors.surname && errors.surname.message ?
+                            <Text className="text-danger fs-13 mb-1">{errors.surname && errors.surname.message}</Text> :
+                            <Text className="text-capitalize fs-13 mb-1 text-danger text-bold">Sur Name</Text>
                         }
 
                         <input
                             type="text"
-                            className={errors.last_name ? "form-control shadow-none error" : "form-control border border-danger shadow-none"}
-                            placeholder="Last Name"
-                            {...register("last_name", { required: "E-mail or Phone is required" })}
+                            className={errors.surname ? "form-control shadow-none error" : "form-control border border-danger shadow-none"}
+                            placeholder="Sur Name"
+                            {...register("surname", { required: "Surname is required" })}
                         />
                     </FormGroup>
 
                     {/* E-mail */}
                     <FormGroup>
-                        {errors.email_or_phone && errors.email_or_phone.message ?
-                            <Text className="text-danger fs-13 mb-1">{errors.email_or_phone && errors.email_or_phone.message}</Text> :
+                        {errors.email && errors.email.message ?
+                            <Text className="text-danger fs-13 mb-1">{errors.email && errors.email.message}</Text> :
                             <Text className="text-capitalize fs-13 mb-1 text-danger text-bold">E-mail</Text>
                         }
 
                         <input
                             type="text"
-                            className={errors.email_or_phone ? "form-control shadow-none error" : "form-control border border-danger shadow-none"}
+                            className={errors.email ? "form-control shadow-none error" : "form-control border border-danger shadow-none"}
                             placeholder="example@gmail.com"
-                            {...register("email_or_phone", { required: "E-mail or Phone is required" })}
+                            {...register("email", {
+                                pattern: {
+                                    value: isValidEmail(),
+                                    message: "Invalid e-mail address"
+                                }
+                            })}
                         />
                     </FormGroup>
 
@@ -120,8 +126,8 @@ export const RegistrationForm = (props) => {
                         name="checkboxvx"
                         label={"Sign Up for email address"}
                         style={{ fontSize: 13, marginBottom: 15, cursor: "pointer", borderBlockColor: 'red' }}
-                        checked={activated}
-                        onChange={() => setActivated(!activated)}
+                        checked={props.subscribe}
+                        onChange={() => props.setSubscribe(!props.subscribe)}
                     />
 
                     {/* Submit button */}

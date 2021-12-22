@@ -24,7 +24,7 @@ const CountryWiseInformation = async(info) => {
         }
     }
 
-    return await Axios.get(`${Api}/process/request/${info}`)
+    return await Axios.get(`${Api}/process/request/${info}`, config)
 }
 
 

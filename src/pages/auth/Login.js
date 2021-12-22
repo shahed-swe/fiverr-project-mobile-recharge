@@ -6,8 +6,12 @@ import { useHistory } from 'react-router-dom'
 // created components
 import { LoginForm } from '../../components/form/loginForm'
 import { Container } from '../../components/container'
-import { Navbar } from '../../components/navbar/index' 
+import { Navbar } from '../../components/navbar/index'
 import { Footer } from '../../components/footer/index'
+import { Requests } from '../../utils/Http/index'
+import { Toastify } from '../../components/toastify/Toastify'
+import { MiddleLayout } from '../../components/middlelayout'
+
 // styles
 import './style.scss'
 
@@ -19,34 +23,48 @@ const Login = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('token')
-        if (token) history.push('/home')
+        if (token) history.push('/')
     }, [history])
 
 
     const login = async (data) => {
-        localStorage.setItem('token', data.email)
-        history.push('/home')
+        clearErrors()
+        try {
+            setLoading(true)
+            const body = {
+                user: {
+                    email: data.email,
+                    password: data.password,
+                }
+            }
+            const response = await Requests.Authentication.Login(body)
+            if (response.data && response.status === 200) {
+                
+                localStorage.setItem('token', response.data.user.token)
+                history.push('/')
+            }
+        } catch (error) {
+            if(error){
+                Toastify.Error("Credential Error")
+            }
+        }
     }
 
     return (
         <div>
+            <Navbar/>
+            <div className='auth-container'>
 
-        <Navbar/>
-        <div className='auth-container'>
-            <Container.Basic>
-                <Container.Row>
-                    <Container.Column>
-                        <LoginForm
-                            handleSubmit={handleSubmit}
-                            onSubmit={login}
-                            errors={errors}
-                            isLoading={isLoading}
-                            register={register}
-                        />
-                    </Container.Column>
-                </Container.Row>
-            </Container.Basic>
-        </div>
+                <MiddleLayout>
+                    <LoginForm
+                        handleSubmit={handleSubmit}
+                        onSubmit={login}
+                        errors={errors}
+                        isLoading={isLoading}
+                        register={register}
+                    />
+                </MiddleLayout>
+            </div>
             <Footer />
         </div>
     )

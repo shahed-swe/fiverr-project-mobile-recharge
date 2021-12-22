@@ -11,8 +11,8 @@ import FrontImage from '../../assets/first-section-back.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobeAsia } from '@fortawesome/free-solid-svg-icons'
 
-const Home = () => {
 
+const Home = () => {
     return (
         <div>
             <Navbar />

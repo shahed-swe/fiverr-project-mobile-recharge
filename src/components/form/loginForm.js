@@ -26,16 +26,16 @@ export const LoginForm = (props) => {
 
                     {/* E-mail */}
                     <FormGroup>
-                        {errors.email_or_phone && errors.email_or_phone.message ?
-                            <Text className="text-danger fs-13 mb-1">{errors.email_or_phone && errors.email_or_phone.message}</Text> :
+                        {errors.email && errors.email.message ?
+                            <Text className="text-danger fs-13 mb-1">{errors.email && errors.email.message}</Text> :
                             <Text className="text-capitalize fs-13 mb-1 text-danger text-bold">E-mail / Phone</Text>
                         }
 
                         <input
                             type="text"
-                            className={errors.email_or_phone ? "form-control shadow-none error" : "form-control border border-danger shadow-none"}
+                            className={errors.email ? "form-control shadow-none error" : "form-control border border-danger shadow-none"}
                             placeholder="example@gmail.com / 01xxxxxxxxx"
-                            {...register("email_or_phone", { required: "E-mail or Phone is required"})}
+                            {...register("email", { required: "E-mail or Phone is required"})}
                         />
                     </FormGroup>
 
@@ -80,7 +80,7 @@ export const LoginForm = (props) => {
                         </div>
                     </FormGroup>
                     <div className='p-2'>
-                        <Link to="/forgot-password">
+                        <Link to="/reset">
                             <span className="fs-16 text-bold text-dark"> Forgot Password?</span>
                         </Link>
                     </div>

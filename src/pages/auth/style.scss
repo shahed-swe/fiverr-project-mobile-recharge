@@ -1,6 +1,5 @@
+@import '../../colors.scss';
 .auth-container {
-    padding-top: 50px;
-    padding-bottom: 50px;
     .card {
         margin: auto;
         @media (min-width: 576px) {
@@ -11,4 +10,21 @@
 
 input::placeholder {
     color: #EA4335 !important;
+}
+
+.login-section {
+    position: absolute;
+    top: 5%;
+}
+
+.text-gray {
+    color: $gray-600
+}
+
+.resetpass {
+    position: relative;
+    // left: -102%;
+    // width: 352%;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
