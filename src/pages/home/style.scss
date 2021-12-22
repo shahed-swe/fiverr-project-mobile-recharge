@@ -1,16 +1,36 @@
+.home-section {
+    overflow-x: hidden;
+}
+
 .home-section__inside {
     position: absolute;
     top: 24%;
     left: 7%;
 }
 
-.input-group-extra {
+.search-seaction {
     position: relative;
-    left: 35px;
-    z-index: 99;
+    left: 10%;
+    margin-left: 11rem !important;
 }
 
-.extra-design {
+.input-group-extra {
     position: relative;
-    left: -20px;
+    left: -21px;
+    top: 42px;
+    overflow-x: hidden;
+    padding: 0.79rem !important;
+    padding-right: 0.5rem !important;
+    z-index: 99;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    overflow: hidden;
+}
+
+.input-group-extra-secondary {
+    position: relative;
+    top: -42px;
+    left: 717px;
+    z-index: 99;
+    overflow: hidden;
 }

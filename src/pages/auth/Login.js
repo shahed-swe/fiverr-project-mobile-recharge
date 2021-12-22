@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom'
 
 // created components
 import { LoginForm } from '../../components/form/loginForm'
-import { Container } from '../../components/container'
 import { Navbar } from '../../components/navbar/index'
 import { Footer } from '../../components/footer/index'
 import { Requests } from '../../utils/Http/index'

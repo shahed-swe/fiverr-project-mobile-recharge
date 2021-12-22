@@ -11,6 +11,7 @@ import Register from './pages/auth/Register';
 import Reset from './pages/auth/Reset'
 // home page
 import Home from './pages/home/index'
+import Recharge from './pages/recharge';
 
 // extra components
 import ScrollToTop from './components/scrollTop/index';
@@ -27,6 +28,7 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/reset" component={Reset}/>
+            <Route exact path="/recharge/:code" component={Recharge}/>
           </Switch>
         </ScrollToTop>
       </Router>

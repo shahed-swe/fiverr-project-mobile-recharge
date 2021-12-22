@@ -1,3 +1,6 @@
+// react components
+import { useState, useEffect, useCallback } from 'react'
+import { useHistory } from 'react-router-dom'
 // created components
 import { Container } from '../../components/container'
 import { Navbar } from '../../components/navbar/index'
@@ -10,9 +13,48 @@ import FrontImage from '../../assets/first-section-back.jpg'
 // fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobeAsia } from '@fortawesome/free-solid-svg-icons'
+import { SingleSelect } from '../../components/select/index'
+
+// backend request
+import { Requests } from '../../utils/Http/index'
+import { Toastify } from '../../components/toastify/Toastify'
 
 
 const Home = () => {
+    // states
+    const history = useHistory()
+    const [data, setData] = useState([])
+    const [country, setCountry] = useState(null)
+
+
+    // fetching country list
+    const fetchCountryList = useCallback(async () => {
+        const response = await Requests.CountryApi.CountryList()
+        if (response.data && response.status === 200) {
+            const data = response.data.map(item => {
+                return { label: `+ ${item.InternationalDialingInformations[0].Prefix}  ${item.CountryIso}`, value: item.CountryIso };
+            });
+            console.log(data)
+            setData(data)
+        }
+    }, [])
+
+    // for  fetching contry list on load
+    useEffect(() => {
+        fetchCountryList()
+    }, [fetchCountryList])
+
+    // handle Selected country
+    const  handleSelect = () => {
+        if(country){
+            history.push(`/recharge/${country}`)
+        }else{
+            Toastify.Error("Please Select a country")
+        }
+    }
+
+
+
     return (
         <div>
             <Navbar />
@@ -24,12 +66,21 @@ const Home = () => {
                             <div className='text-center'>
                                 <Text className="fs-28 font-weight-bold text-white">INTERNATIONAL MOBILE RECHARGE</Text>
                                 <Text className="fs-14 text-white position-relative left">Where to sent the Top-Up</Text>
-                                <div className="input-group mb-3 d-flex justify-content-center extra-design">
-                                    <div className="input-group-prepend ">
-                                        <span className="input-group-text bg-danger border border-danger rounded-pill input-group-extra pl-3 pr-3" id="basic-addon1" style={{color: "white"}}><FontAwesomeIcon icon={faGlobeAsia}/></span>
-                                    </div>
-                                    <input type="text" className="form-control shadow-none col-5 border border-danger rounded-pill pl-5" aria-label="Username" aria-describedby="basic-addon1" />
+                            </div>
+                            <div className='search-seaction ml-5 pl-5'>
+                                <button className="input-group-text bg-danger border border-danger input-group-extra" style={{ color: "white" }}><FontAwesomeIcon icon={faGlobeAsia} /></button>
+                                <div className='text-left'>
+                                    <SingleSelect
+                                        className="col-7"
+                                        options={data}
+                                        placeholder={'a country'}
+                                        value={event => setCountry(event.value)}
+                                    />
                                 </div>
+                                
+                                <button className="input-group-text bg-danger border border-danger input-group-extra-secondary pl-3 pr-3 p-2" style={{ color: "white" }} onClick={handleSelect}>Go</button>
+                            </div>
+                            <div className='text-center'>
                                 <Text className="fs-14 text-white position-relative left font-weight-bold">Reliable Mobile Top-up with lowest rates</Text>
                             </div>
                         </Container.Column>

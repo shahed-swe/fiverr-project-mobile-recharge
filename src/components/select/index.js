@@ -15,6 +15,10 @@ const customStyles = (radius) => {
             boxShadow: 'none', '&:hover': { borderColor: '1px solid #ced4da' },
             border: state.isFocused ? '1px solid #dfdfdf' : '1px solid #ced4da',
             borderRadius: radius || 4
+        }),
+        menu:(provided, state) => ({
+            ...provided,
+            width: 350
         })
     }
     return myStyles
@@ -50,6 +54,7 @@ export const SingleSelect = (props) => {
                 placeholder={`Select ${props.placeholder}`}
                 isClearable={props.isClearable}
                 clear={props.clear}
+                className={props.className}
                 components={{
                     DropdownIndicator: () => null,
                     IndicatorSeparator: () => null
