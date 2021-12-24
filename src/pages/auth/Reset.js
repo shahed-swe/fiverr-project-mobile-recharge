@@ -48,21 +48,29 @@ const ResetRequest = () => {
             <Navbar />
             <div className="auth-container">
                 <MiddleLayout>
-                    <div className='resetpass-section mt-5'>
-                        <div className='text-center'>
-                            <Text className="fs-26 font-weight-bolder mb-1 text-extra text-gray pb-3">Password Reset</Text>
-                        </div>
-                        <div className='bg-white resetpass p-5 border border-danger'>
-                            <SendOtpForm
-                                handleSubmit={handleSubmit}
-                                onSubmit={SendOTP}
-                                errors={errors}
-                                sendingotp={sendingotp}
-                                t={t}
-                                register={register}
-                            />
-                        </div>
-                    </div>
+                    <Container.Basic>
+                        <Container.Column className="pt-5 pb-5 col-lg-7 mx-auto">
+                            <div className='pt-5 pb-5'>
+                                <div className='resetpass-section'>
+                                    <div className='text-center'>
+                                        <Text className="fs-26 font-weight-bolder mb-1 text-extra text-gray pb-3">Password Reset</Text>
+                                    </div>
+                                    <div className='bg-white resetpass p-5 border border-danger'>
+                                        <SendOtpForm
+                                            handleSubmit={handleSubmit}
+                                            onSubmit={SendOTP}
+                                            errors={errors}
+                                            sendingotp={sendingotp}
+                                            t={t}
+                                            register={register}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </Container.Column>
+                    </Container.Basic>
+                    
                 </MiddleLayout>
             </div>
             <Footer />

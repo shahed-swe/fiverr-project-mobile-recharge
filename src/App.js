@@ -28,7 +28,7 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/reset" component={Reset}/>
-            <Route exact path="/recharge/:code" component={Recharge}/>
+            <Route exact path="/recharge/:code/:name/:prefix" component={Recharge}/>
           </Switch>
         </ScrollToTop>
       </Router>

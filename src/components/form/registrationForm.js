@@ -19,7 +19,7 @@ export const RegistrationForm = (props) => {
                 <Text className="fs-20 font-weight-bolder mb-1">Sign In</Text>
                 <div>
                     Already Have an account?
-                    <Link to="/">
+                    <Link to="/login">
                         <span className="fs-16 text-bold text-dark "> Login</span>
                     </Link>
                 </div>

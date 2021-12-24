@@ -67,15 +67,22 @@ const Register = () => {
 
             <div className='auth-container'>
                 <MiddleLayout>
-                    <RegistrationForm
-                        handleSubmit={handleSubmit}
-                        onSubmit={registration}
-                        errors={errors}
-                        isLoading={isLoading}
-                        register={register}
-                        subscribe={subscribe}
-                        setSubscribe={setSubscribe}
-                    />
+                    <Container.Basic>
+                        <Container.Column className="pt-5 pb-5">
+                            <div className='pt-5 pb-5'>
+                                <RegistrationForm
+                                    handleSubmit={handleSubmit}
+                                    onSubmit={registration}
+                                    errors={errors}
+                                    isLoading={isLoading}
+                                    register={register}
+                                    subscribe={subscribe}
+                                    setSubscribe={setSubscribe}
+                                />
+                            </div>
+                        </Container.Column>
+                    </Container.Basic>
+                    
                 </MiddleLayout>
             </div>
             <Footer/>

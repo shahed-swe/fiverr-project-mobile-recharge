@@ -26,13 +26,13 @@ const Home = () => {
     const [data, setData] = useState([])
     const [country, setCountry] = useState(null)
 
-
     // fetching country list
     const fetchCountryList = useCallback(async () => {
         const response = await Requests.CountryApi.CountryList()
         if (response.data && response.status === 200) {
+            console.log(response.data)
             const data = response.data.map(item => {
-                return { label: `+ ${item.InternationalDialingInformations[0].Prefix}  ${item.CountryIso}`, value: item.CountryIso };
+                return { label: `+ ${item.InternationalDialingInformations[0].Prefix}  ${item.CountryIso}`, value: item.CountryIso, name: item.CountryName, prefix: item.InternationalDialingInformations[0].Prefix };
             });
             console.log(data)
             setData(data)
@@ -47,13 +47,13 @@ const Home = () => {
     // handle Selected country
     const  handleSelect = () => {
         if(country){
-            history.push(`/recharge/${country}`)
+            history.push(`/recharge/${country.value}/${country.name}/${country.prefix}`)
         }else{
             Toastify.Error("Please Select a country")
         }
     }
 
-
+    console.log(country)
 
     return (
         <div>
@@ -74,7 +74,7 @@ const Home = () => {
                                         className="col-7"
                                         options={data}
                                         placeholder={'a country'}
-                                        value={event => setCountry(event.value)}
+                                        value={event => setCountry(event)}
                                     />
                                 </div>
                                 

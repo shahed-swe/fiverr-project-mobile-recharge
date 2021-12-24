@@ -2,3 +2,16 @@
     border-bottom-right-radius: 15px;
     border-top-left-radius: 15px;
 }
+
+.prefix {
+    position: relative;
+    left: 5px;
+    z-index: 99;
+}
+
+.extra-input {
+    position: relative;
+    left: -32px;
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+}

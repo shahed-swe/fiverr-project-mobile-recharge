@@ -13,6 +13,7 @@ import { MiddleLayout } from '../../components/middlelayout'
 
 // styles
 import './style.scss'
+import { Container } from '../../components/container/index'
 
 const Login = () => {
     const history = useHistory()
@@ -38,12 +39,12 @@ const Login = () => {
             }
             const response = await Requests.Authentication.Login(body)
             if (response.data && response.status === 200) {
-                
+
                 localStorage.setItem('token', response.data.user.token)
                 history.push('/')
             }
         } catch (error) {
-            if(error){
+            if (error) {
                 Toastify.Error("Credential Error")
             }
         }
@@ -51,17 +52,24 @@ const Login = () => {
 
     return (
         <div>
-            <Navbar/>
+            <Navbar />
             <div className='auth-container'>
-
                 <MiddleLayout>
-                    <LoginForm
-                        handleSubmit={handleSubmit}
-                        onSubmit={login}
-                        errors={errors}
-                        isLoading={isLoading}
-                        register={register}
-                    />
+                    <Container.Basic>
+                        <Container.Column className="pt-5 pb-5">
+                            <div className='pt-5 pb-5'>
+                                <LoginForm
+                                    handleSubmit={handleSubmit}
+                                    onSubmit={login}
+                                    errors={errors}
+                                    isLoading={isLoading}
+                                    register={register}
+                                />
+                            </div>
+                            
+                        </Container.Column>
+                    </Container.Basic>
+
                 </MiddleLayout>
             </div>
             <Footer />
