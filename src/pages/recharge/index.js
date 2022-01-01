@@ -15,11 +15,12 @@ import { Container } from '../../components/container'
 import { DangerButton } from '../../components/button'
 
 const Recharge = () => {
+    const params = useParams()
     const [operator, setOperator] = useState(null)
     const [number, setNumber] = useState(null)
     const [showNumber, setShowNumber] = useState(false)
-    const params = useParams()
     const [data, setData] = useState([])
+    const [price, setPrice] = useState(null)
 
     // get country details
     const fetchCountryDetails = useCallback(async (code) => {
@@ -39,6 +40,8 @@ const Recharge = () => {
     const handleGetNumber = () => {
         setShowNumber(true)
     }
+
+    console.log(operator && operator.products)
 
     return (
         <div>
@@ -61,9 +64,8 @@ const Recharge = () => {
                                                 <div className='d-flex justify-content-between col-8'>
                                                     <div className='my-auto'>
                                                         <span className={`flag-icon pl-3 pr-3 p-2 flag-icon-${params.code.toLowerCase()}`}> </span>
-                                                        <span className='my-auto ml-2'>{params.name}</span> 
+                                                        <span className='my-auto ml-2'>{params.name}</span>
                                                     </div>
-                                                    
                                                     <div className='my-auto'>
                                                         <Edit size={22} color={"red"} />
                                                     </div>
@@ -82,10 +84,7 @@ const Recharge = () => {
                                                             <Edit size={22} color={"red"} />
                                                         </div>
                                                     </div>
-
-
                                                 </div> : null}
-
                                             {showNumber ?
                                                 <div className='bg-white d-flex justify-content-between border border-danger ml-5 mr-5 p-2 mt-2 text-left'>
                                                     <Text className="font-weight-bold fs-14 my-auto p-2 col-4">Number: </Text>
@@ -102,9 +101,38 @@ const Recharge = () => {
                                                             <Edit size={22} color={"red"} />
                                                         </div>
                                                     </div>
-
-                                                    
                                                 </div> : null}
+                                            {price ?
+                                            <div>
+                                                    <div className='bg-white d-flex justify-content-between border border-danger ml-5 mr-5 p-2 mt-2 text-left'>
+                                                        <Text className="font-weight-bold fs-14 my-auto p-2 col-4">Received Value: </Text>
+                                                        <div className="d-flex justify-content-between col-8">
+                                                            <div className="d-flex justify-content-start">
+                                                                <div className='my-auto'>
+                                                                    <span className='ml-2 p-0 my-auto'>{price.ReceiveValue} USD</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className='my-auto'>
+                                                                <Edit size={22} color={"red"} />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className='bg-white d-flex justify-content-between border border-danger ml-5 mr-5 p-2 mt-2 text-left'>
+                                                        <Text className="font-weight-bold fs-14 my-auto p-2 col-4">Received Value: </Text>
+                                                        <div className="d-flex justify-content-between col-8">
+                                                            <div className="d-flex justify-content-start">
+                                                                <div className='my-auto'>
+                                                                    <span className='ml-2 p-0 my-auto'>{price.ReceiveValue} {price.ReceiveCurrencyIso}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className='my-auto'>
+                                                                <Edit size={22} color={"red"} />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                                
+                                                : null}
                                         </div>
                                     </div>
                                     <div className='bg-white resetpass border border-danger pb-3 mt-5'>
@@ -115,7 +143,7 @@ const Recharge = () => {
                                                     <div className='row'>
                                                         {data && data.map((item, index) => {
                                                             return (
-                                                                <div className='col-3 my-auto p-0 pb-2' onClick={() => setOperator(item)} key={index}>
+                                                                <div className='col-3 my-auto p-0 pb-2' style={{ cursor: "pointer" }} onClick={() => setOperator(item)} key={index}>
                                                                     <div className='w-100'>
                                                                         <img src={item.LogoUrl} alt="" width={120} height={120} className='img-fluid ' />
                                                                     </div>
@@ -123,7 +151,6 @@ const Recharge = () => {
                                                             )
                                                         })}
                                                     </div>
-
                                                 </div>
                                             </div> :
                                             null}
@@ -137,30 +164,40 @@ const Recharge = () => {
                                                                 <span className="input-group-text bg-danger m-0" id="basic-addon1"><span className={`flag-icon bg-white p-1 pl-2 pr-2 rounded-circle flag-icon-${params.code.toLowerCase()}`}></span></span>
                                                             </div>
                                                             <span className="prefix my-auto">+{params.prefix}</span>
-                                                            <input type="text" class="form-control shadow-none extra-input pl-5 p-3 border border-danger" min="10" max="12" required onChange={(event) => setNumber(event.target.value)} />
+                                                            <input type="text" className="form-control shadow-none extra-input pl-5 p-3 border border-danger" min="10" max="12" required onChange={(event) => setNumber(event.target.value)} />
                                                             <DangerButton onClick={() => handleGetNumber()}>Submit</DangerButton>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </div>
                                             : null}
-
                                         {showNumber ?
                                             <div className='text-center pt-2'>
                                                 <Text className="fs-16 font-weight-bolder text-gray">Select Amount</Text>
                                                 <div className='bg-white ml-5 mr-5 p-3'>
-                                                    <div className='row mx-auto'>
-                                                        <div className="input-group mb-3 ">
-                                                            <div className="input-group-prepend">
-                                                                <span className={`input-group-text bg-danger flag-icon flag-icon-${params.code.toLowerCase()}`} id="basic-addon1">{params.code}</span>
+                                                    {operator && operator.products && operator.products.length > 0 && operator.products.map((item, index) =>
+                                                        <div className='mt-3' key={index}>
+                                                            <Text className="fs-14 fw-bold">{item.ProviderCode}</Text>
+                                                            <div className='row'>
+                                                                {item.price && item.price.length > 0 && item.price.map((item2, index) => {
+                                                                    return (
+                                                                        <Container.Column className="col-lg-4" key={index}>
+                                                                            <div className='border border-danger price-rounded' style={{ cursor: "pointer" }} onClick={() => setPrice(item2)}>
+                                                                                <div className='pt-2'>
+                                                                                    <span className="mb-0"> Charges: {item2.SendValueWithOutServiceFees} USD</span>
+                                                                                </div>
+                                                                                <hr />
+                                                                                <div className='mb-2'>
+                                                                                    <span>Receive: {item2.ReceiveValue} {item2.ReceiveCurrencyIso}</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </Container.Column>
+                                                                    )
+                                                                })}
                                                             </div>
-                                                            <span className="prefix my-auto">+{params.prefix}</span>
-                                                            <input type="text" class="form-control shadow-none extra-input pl-5 border border-danger" min="10" max="12" onChange={(event) => setNumber(event.target.value)} />
-                                                            <DangerButton onClick={() => handleGetNumber()}>Submit</DangerButton>
-                                                        </div>
-                                                    </div>
 
+                                                        </div>
+                                                    )}
                                                 </div>
                                             </div>
                                             : null}
@@ -169,7 +206,6 @@ const Recharge = () => {
                             </div>
                         </Container.Column>
                     </Container.Basic>
-
                 </MiddleLayout>
             </div>
             <Footer />
