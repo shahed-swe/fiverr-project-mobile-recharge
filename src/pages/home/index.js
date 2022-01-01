@@ -26,15 +26,14 @@ const Home = () => {
     const [data, setData] = useState([])
     const [country, setCountry] = useState(null)
 
+
     // fetching country list
     const fetchCountryList = useCallback(async () => {
         const response = await Requests.CountryApi.CountryList()
         if (response.data && response.status === 200) {
-            console.log(response.data)
             const data = response.data.map(item => {
-                return { label: `+ ${item.InternationalDialingInformations[0].Prefix}  ${item.CountryIso}`, value: item.CountryIso, name: item.CountryName, prefix: item.InternationalDialingInformations[0].Prefix };
+                return { label: <div className='d-flex justify-content-start'><span className={`flag-icon rounded-circle flag-icon-${item.CountryIso.toLowerCase()}`}></span><span className='pl-2'>{`+ ${item.InternationalDialingInformations[0].Prefix}  ${item.CountryIso}`}</span></div>, value: item.CountryIso, name: item.CountryName, prefix: item.InternationalDialingInformations[0].Prefix };
             });
-            console.log(data)
             setData(data)
         }
     }, [])
@@ -52,8 +51,6 @@ const Home = () => {
             Toastify.Error("Please Select a country")
         }
     }
-
-    console.log(country)
 
     return (
         <div>

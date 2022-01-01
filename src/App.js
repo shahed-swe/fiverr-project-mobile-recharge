@@ -16,6 +16,7 @@ import Recharge from './pages/recharge';
 // extra components
 import ScrollToTop from './components/scrollTop/index';
 // import RoleBaseRoute from './components/privateroute/index'
+import 'flag-icon-css/css/flag-icons.min.css';
 
 const App = () => {
 

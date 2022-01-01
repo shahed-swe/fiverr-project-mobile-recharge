@@ -1,3 +1,36 @@
+$laptop1440: 1450px;
+$laptop1030: 1030px;
+$tablet: 770px;
+$smalldevice: 790px;
+// partisions
+@mixin respond ($breakpoint) {
+    @if $breakpoint==mobile {
+        @media only screen and (max-width: 480px) {
+            @content;
+        }
+    }
+    @if $breakpoint==tablet {
+        @media only screen and (max-width: $tablet) {
+            @content;
+        }
+    }
+    @if $breakpoint==laptopsmall {
+        @media only screen and (max-width: $laptop1030) {
+            @content;
+        }
+    }
+    @if $breakpoint==laptopbig {
+        @media only screen and (max-width: $laptop1440) {
+            @content;
+        }
+    }
+    @if $breakpoint==smalldevice {
+        @media only screen and (max-height: $smalldevice) {
+            @content;
+        }
+    }
+}
+
 .home-section {
     overflow-x: hidden;
 }
@@ -33,4 +66,8 @@
     left: 717px;
     z-index: 99;
     overflow: hidden;
+}
+
+.label-extra {
+    width: 500px;
 }
