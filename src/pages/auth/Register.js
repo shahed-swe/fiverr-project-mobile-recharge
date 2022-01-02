@@ -8,9 +8,10 @@ import { RegistrationForm } from '../../components/form/registrationForm'
 import { Container } from '../../components/container'
 import { Navbar } from '../../components/navbar/index'
 import { Toastify } from '../../components/toastify/Toastify'
+import { MiddleLayout } from '../../components/middlelayout'
+import { Text } from '../../components/text/Text'
 // api request
 import { Requests } from '../../utils/Http/index'
-import { MiddleLayout } from '../../components/middlelayout'
 
 // styles
 import './style.scss'
@@ -22,6 +23,8 @@ const Register = () => {
     // states
     const [isLoading, setLoading] = useState(false);
     const [subscribe, setSubscribe] = useState(false)
+    const [message, setMessage] = useState(false)
+
 
     useEffect(() => {
         const token = localStorage.getItem('token')
@@ -45,7 +48,8 @@ const Register = () => {
             console.log(response)
             if (response.data && response.status === 200) {
                 Toastify.Success("Successfully Registered")
-                history.push('/login')
+                // history.push('/login')
+                setMessage(true)
                 setLoading(false)
             }
 
@@ -69,6 +73,7 @@ const Register = () => {
                 <MiddleLayout>
                     <Container.Basic>
                         <Container.Column className="pt-5 pb-5">
+                            {!message ? 
                             <div className='pt-5 pb-5'>
                                 <RegistrationForm
                                     handleSubmit={handleSubmit}
@@ -79,7 +84,14 @@ const Register = () => {
                                     subscribe={subscribe}
                                     setSubscribe={setSubscribe}
                                 />
-                            </div>
+                            </div>:
+                            <div className='text-section pt-5 pb-5 mt-5 '>
+                                    <Text className="fs-22 font-weight-bold text-gray text-center">Verify Your Email To finish Signup</Text>
+                                    <div className='bg-white resetpass border border-danger pb-3 mt-5 mb-5 pb-5'>
+                                        <Text className="fs-14 text-center text-gray py-5">Thank you for choosing us, An email is send to your email account. <br/> Please
+                                            click the verification link from your email.</Text>
+                                    </div>
+                            </div>}
                         </Container.Column>
                     </Container.Basic>
                     

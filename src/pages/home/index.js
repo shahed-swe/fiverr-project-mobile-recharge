@@ -64,20 +64,18 @@ const Home = () => {
                                 <Text className="fs-28 font-weight-bold text-white">INTERNATIONAL MOBILE RECHARGE</Text>
                                 <Text className="fs-14 text-white position-relative left">Where to sent the Top-Up</Text>
                             </div>
-                            <div className='search-seaction ml-5 pl-5'>
+                            <div className='search-seaction d-flex justify-content-center'>
                                 <button className="input-group-text bg-danger border border-danger input-group-extra" style={{ color: "white" }}><FontAwesomeIcon icon={faGlobeAsia} /></button>
-                                <div className='text-left'>
+                                <div className='w-50'>
                                     <SingleSelect
-                                        className="col-7"
                                         options={data}
                                         placeholder={'a country'}
                                         value={event => setCountry(event)}
                                     />
                                 </div>
-                                
                                 <button className="input-group-text bg-danger border border-danger input-group-extra-secondary pl-3 pr-3 p-2" style={{ color: "white" }} onClick={handleSelect}>Go</button>
                             </div>
-                            <div className='text-center'>
+                            <div className='text-center mt-2'>
                                 <Text className="fs-14 text-white position-relative left font-weight-bold">Reliable Mobile Top-up with lowest rates</Text>
                             </div>
                         </Container.Column>
