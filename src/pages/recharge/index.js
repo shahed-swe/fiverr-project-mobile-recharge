@@ -1,17 +1,18 @@
 // react components
-import { useEffect, useState, useCallback } from 'react'
-import { Link, useParams } from 'react-router-dom'
 import { Edit, Phone } from 'react-feather'
+import { Link, useParams } from 'react-router-dom'
+import { useEffect, useState, useCallback } from 'react'
+import { useForm } from 'react-hook-form'
 // created components
+import { Text } from '../../components/text/Text'
 import { Navbar } from '../../components/navbar/index'
 import { Footer } from '../../components/footer/index'
 import { MiddleLayout } from '../../components/middlelayout'
-import { Text } from '../../components/text/Text'
 
 // font awesome
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCreditCard } from '@fortawesome/free-solid-svg-icons'
 import { faPaypal } from '@fortawesome/free-brands-svg-icons'
+import { faCreditCard } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // style
 import './style.scss'
@@ -22,15 +23,16 @@ import { Toastify } from '../../components/toastify/Toastify'
 
 const Recharge = () => {
     const params = useParams()
-    const [operator, setOperator] = useState(null)
-    const [number, setNumber] = useState(null)
-    const [showNumber, setShowNumber] = useState(false)
+    const [page, setPage] = useState(6)
     const [data, setData] = useState([])
     const [price, setPrice] = useState(null)
-    const [showprice, setshowprice] = useState(null)
+    const [number, setNumber] = useState(null)
     const [packages, setPackage] = useState(null)
+    const [operator, setOperator] = useState(null)
+    const [showprice, setshowprice] = useState(null)
     const [pricesdata, setPriceData] = useState(null)
-    const [page, setPage] = useState(6)
+    const [showNumber, setShowNumber] = useState(false)
+    const { register, handleSubmit, setError, formState: { errors } } = useForm()
 
     // get country details
     const fetchCountryDetails = useCallback(async (code) => {
@@ -40,6 +42,7 @@ const Recharge = () => {
         }
     }, [])
 
+
     useEffect(() => {
         if (params.code) {
             fetchCountryDetails(params.code)
@@ -47,27 +50,48 @@ const Recharge = () => {
     }, [fetchCountryDetails, params])
 
 
-    const handleGetNumber = () => {
-        setShowNumber(true)
+    // handle phone number validation
+    const isValidPhone = (phonenumber) => {
+        const regex2 = new RegExp(operator.ValidationRegex)
+        return regex2.test(phonenumber)
     }
 
-    const fetchData = useCallback(async() => {
+    const handleGetNumber = (data) => {
+        // console.log(data.phone_no)
+        console.log(isValidPhone(params.prefix+data.phone_no))
+        if (isValidPhone(params.prefix+data.phone_no) === false){
+            Toastify.Error("Invalid Phone number")
+            setError("phone_no", {
+                type: "manual",
+                message: "Invalid Phone number",
+            });
+        }else{
+            setNumber(data.phone_no)
+            setShowNumber(true)
+
+        }
+    }
+
+    const fetchData = useCallback(async () => {
         const data = []
         const newpage = page + 3
         operator && operator.products && operator.products.length > 0 && operator.products.map((item) => item.price.map((item2) => data.push(item2)))
         setPriceData(data.splice(0, newpage))
-    }, [operator,page])
+    }, [operator, page])
 
     // show prices
     useEffect(() => {
         fetchData(6)
-    },[fetchData])
+    }, [fetchData])
 
 
 
     const gotoTop = () => {
         return window.scrollTo({ top: 0, behavior: 'smooth' })
     }
+
+    
+
 
     return (
         <div>
@@ -92,7 +116,7 @@ const Recharge = () => {
                                                         <span className='my-auto ml-2'>{params.name}</span>
                                                     </div>
                                                     <Link to={'/'}>
-                                                        <div className='my-auto'  style={{ cursor: 'pointer' }}>
+                                                        <div className='my-auto' style={{ cursor: 'pointer' }}>
                                                             <Edit size={22} color={"red"} />
                                                         </div>
                                                     </Link>
@@ -124,7 +148,7 @@ const Recharge = () => {
                                                                 <span className='ml-2 p-0 my-auto'>+{params.prefix} | {number}</span>
                                                             </div>
                                                         </div>
-                                                        <div className='my-auto' onClick={() => {setShowNumber(false);setshowprice(false)}} style={{ cursor: 'pointer' }}>
+                                                        <div className='my-auto' onClick={() => { setShowNumber(false); setshowprice(false) }} style={{ cursor: 'pointer' }}>
                                                             <Edit size={22} color={"red"} />
                                                         </div>
                                                     </div>
@@ -186,14 +210,24 @@ const Recharge = () => {
                                                 <Text className="fs-16 font-weight-bolder text-gray">Where to send the Top-Up?</Text>
                                                 <div className='bg-white ml-5 mr-5 p-3'>
                                                     <div className='row mx-auto'>
-                                                        <div className="input-group mb-3 ">
+                                                        {errors.phone_no && errors.phone_no.message ?
+                                                            <Text className="text-danger fs-13 mb-1">{errors.phone_no && errors.phone_no.message}</Text> :
+                                                            null
+                                                        }
+                                                        <form className="input-group mb-3 " onSubmit={handleSubmit(handleGetNumber)}>
+
                                                             <div className="input-group-prepend">
                                                                 <span className="input-group-text bg-danger m-0" id="basic-addon1"><span className={`flag-icon bg-white p-1 pl-2 pr-2 rounded-circle flag-icon-${params.code.toLowerCase()}`}></span></span>
                                                             </div>
                                                             <span className="prefix my-auto">+{params.prefix}</span>
-                                                            <input type="text" className="form-control shadow-none extra-input pl-5 p-3 border border-danger" onChange={(event) => setNumber(event.target.value)} />
-                                                            <DangerButton onClick={() => handleGetNumber()}>Submit</DangerButton>
-                                                        </div>
+                                                            <input type="text" className={errors.phone_no ? "form-control shadow-none error extra-input pl-5 p-3 border border-danger" : "form-control shadow-none extra-input pl-5 p-3 border border-danger"}
+                                                                placeholder='Enter Phone number'
+                                                                {...register("phone_no", {
+                                                                    required: "Phone number is required",
+                                                                })}
+                                                            />
+                                                            <DangerButton>Submit</DangerButton>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -204,29 +238,29 @@ const Recharge = () => {
                                                 <Text className="fs-16 font-weight-normal text-gray">{packages ? "Commission Rate:" + packages.CommissionRate + " Processing Mode:" + packages.ProcessingMode : ""}</Text>
                                                 <div className='bg-white ml-5 mr-5 p-3'>
                                                     {/* {operator && operator.products && operator.products.length > 0 && operator.products.map((item, index) => */}
-                                                        <div className='mt-3'>
-                                                            <div className='row'>
-                                                                {pricesdata && pricesdata.length > 0 && pricesdata.map((item2, index) => {
-                                                                    return (
-                                                                        <Container.Column className="col-lg-4 pt-2" key={index}>
-                                                                            <div className='border border-danger price-rounded' style={{ cursor: "pointer" }} onClick={() => { setPrice(item2); setshowprice(true); gotoTop();}}>
-                                                                                <div className='pt-2'>
-                                                                                    <span className="mb-0"> Charges: {item2.SendValueWithOutServiceFees} USD</span>
-                                                                                </div>
-                                                                                <hr />
-                                                                                <div className='mb-2'>
-                                                                                    <span>Receive: {item2.ReceiveValue} {item2.ReceiveCurrencyIso}</span>
-                                                                                </div>
-
+                                                    <div className='mt-3'>
+                                                        <div className='row'>
+                                                            {pricesdata && pricesdata.length > 0 && pricesdata.map((item2, index) => {
+                                                                return (
+                                                                    <Container.Column className="col-lg-4 pt-2" key={index}>
+                                                                        <div className='border border-danger price-rounded' style={{ cursor: "pointer" }} onClick={() => { setPrice(item2); setshowprice(true); gotoTop(); }}>
+                                                                            <div className='pt-2'>
+                                                                                <span className="mb-0"> Charges: {item2.SendValueWithOutServiceFees} USD</span>
                                                                             </div>
-                                                                        </Container.Column>
-                                                                    )
-                                                                })}
-                                                            </div>
+                                                                            <hr />
+                                                                            <div className='mb-2'>
+                                                                                <span>Receive: {item2.ReceiveValue} {item2.ReceiveCurrencyIso}</span>
+                                                                            </div>
 
+                                                                        </div>
+                                                                    </Container.Column>
+                                                                )
+                                                            })}
                                                         </div>
+
+                                                    </div>
                                                     {/* )} */}
-                                                    <button className='btn btn-danger mt-3 btn-block rounded-pill' onClick={() => { setPage(page+3);fetchData(page)}}>Next</button>
+                                                    <button className='btn btn-danger mt-3 btn-block rounded-pill' onClick={() => { setPage(page + 3); fetchData(page) }}>Next</button>
                                                 </div>
                                             </div>
                                             : null}
