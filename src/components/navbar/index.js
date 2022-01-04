@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { DangerButton } from '../button/index';
 import { NavLink, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import './style.scss'
 
 
@@ -49,9 +50,11 @@ export const Navbar = () => {
                                 </NavLink>
                             </>
                             : null}
+                        <Link to={'/contactus'}>
                         <DangerButton className="nav-item rounded-pill ml-3" style={style.button}>
                             <div className="nav-link pl-4 pr-4 text-white"><span className='text-white'>Contact Us</span> </div>
                         </DangerButton>
+                        </Link>
                     </ul>
                 </div>
             </div>

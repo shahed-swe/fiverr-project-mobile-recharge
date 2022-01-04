@@ -90,6 +90,9 @@ const Recharge = () => {
     }
 
 
+    const handlePaymentGateway = (data) => {
+        console.log(data)
+    }
 
 
     return (
@@ -268,13 +271,13 @@ const Recharge = () => {
                                             <div className='bg-white ml-5 mr-5 p-3'>
                                                 <div className='row mx-auto'>
                                                     <Container.Column className="col-lg-6" >
-                                                        <button className='btn btn-danger btn-block d-flex justify-content-center shadow-none' onClick={() => Toastify.Error("You must be logged in to continue purchase")}>
+                                                        <button className='btn btn-danger btn-block d-flex justify-content-center shadow-none' onClick={() => handlePaymentGateway("card")}>
                                                             <div className='bg-white rounded-circle p-1 pl-2 pr-2' style={{ color: 'red' }} ><FontAwesomeIcon icon={faCreditCard} /></div>
                                                             <Text className="fs-14 my-auto pl-2">Pay with Card</Text>
                                                         </button>
                                                     </Container.Column>
                                                     <Container.Column className="col-lg-6" >
-                                                        <button className='btn btn-outline-danger btn-block d-flex justify-content-center shadow-none' onClick={() => Toastify.Error("You must be logged in to continue purchase")}>
+                                                        <button className='btn btn-outline-danger btn-block d-flex justify-content-center shadow-none' onClick={() => handlePaymentGateway("paypal")}>
                                                             <div className='bg-white rounded-circle p-1 pl-2 pr-2' style={{ color: 'red' }} ><FontAwesomeIcon icon={faPaypal} /></div>
                                                             <Text className="fs-14 my-auto pl-2">Pay with PayPal</Text>
                                                         </button>

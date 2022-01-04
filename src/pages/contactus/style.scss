@@ -1,0 +1,27 @@
+@import '../../colors.scss';
+.auth-container {
+    .card {
+        margin: auto;
+        @media (min-width: 576px) {
+            width: 500px;
+        }
+    }
+}
+
+input::placeholder {
+    color: #EA4335 !important;
+}
+
+.login-section {
+    position: absolute;
+    top: 5%;
+}
+
+.text-gray {
+    color: $gray-600
+}
+
+.resetpass {
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+}

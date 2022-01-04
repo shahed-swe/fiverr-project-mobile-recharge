@@ -18,6 +18,7 @@ import ResetPass from './pages/auth/ResetPass'
 import ScrollToTop from './components/scrollTop/index';
 // import RoleBaseRoute from './components/privateroute/index'
 import 'flag-icon-css/css/flag-icons.min.css';
+import ContactUs from './pages/contactus/ContactUs';
 
 const App = () => {
 
@@ -31,6 +32,7 @@ const App = () => {
             <Route exact path="/register" component={Register} />
             <Route exact path="/reset" component={Reset}/>
             <Route exact path="/resetpass" component={ResetPass}/>
+            <Route exact path="/contactus" component={ContactUs}/>
             <Route exact path="/recharge/:code/:name/:prefix" component={Recharge}/>
           </Switch>
         </ScrollToTop>
