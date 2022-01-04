@@ -1,6 +1,6 @@
 // react components
 import { useEffect, useState, useCallback } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Edit, Phone } from 'react-feather'
 // created components
 import { Navbar } from '../../components/navbar/index'
@@ -76,9 +76,11 @@ const Recharge = () => {
                                                         <span className={`flag-icon pl-3 pr-3 p-2 flag-icon-${params.code.toLowerCase()}`}> </span>
                                                         <span className='my-auto ml-2'>{params.name}</span>
                                                     </div>
-                                                    <div className='my-auto' onClick={() => {setShowNumber(false); setshowprice(false); setOperator(null)}} style={{ cursor: 'pointer' }}>
-                                                        <Edit size={22} color={"red"} />
-                                                    </div>
+                                                    <Link to={'/'}>
+                                                        <div className='my-auto'  style={{ cursor: 'pointer' }}>
+                                                            <Edit size={22} color={"red"} />
+                                                        </div>
+                                                    </Link>
                                                 </div>
 
                                             </div>
@@ -90,7 +92,7 @@ const Recharge = () => {
                                                             <img src={operator.LogoUrl} alt="" className='rounded-circle' style={{ height: "35px", width: "35px" }} />
                                                             <span className='ml-2 p-0'>{operator.Name}</span>
                                                         </div>
-                                                        <div className='my-auto' onClick={() => {setShowNumber(false); setshowprice(false)}} style={{ cursor: 'pointer' }}>
+                                                        <div className='my-auto' onClick={() => { setOperator(null); setShowNumber(false); setshowprice(false) }} style={{ cursor: 'pointer' }}>
                                                             <Edit size={22} color={"red"} />
                                                         </div>
                                                     </div>
@@ -107,7 +109,7 @@ const Recharge = () => {
                                                                 <span className='ml-2 p-0 my-auto'>+{params.prefix} | {number}</span>
                                                             </div>
                                                         </div>
-                                                        <div className='my-auto' onClick={() => setshowprice(false)} style={{ cursor: 'pointer' }}>
+                                                        <div className='my-auto' onClick={() => {setShowNumber(false);setshowprice(false)}} style={{ cursor: 'pointer' }}>
                                                             <Edit size={22} color={"red"} />
                                                         </div>
                                                     </div>
@@ -184,16 +186,15 @@ const Recharge = () => {
                                         {showNumber && !showprice ?
                                             <div className='text-center pt-2'>
                                                 <Text className="fs-16 font-weight-bolder text-gray">Select Amount</Text>
-                                                <Text className="fs-16 font-weight-normal text-gray">{packages ? "Commission Rate:" + packages.CommissionRate + " Processing Mode:" + packages.ProcessingMode: ""}</Text>
+                                                <Text className="fs-16 font-weight-normal text-gray">{packages ? "Commission Rate:" + packages.CommissionRate + " Processing Mode:" + packages.ProcessingMode : ""}</Text>
                                                 <div className='bg-white ml-5 mr-5 p-3'>
                                                     {operator && operator.products && operator.products.length > 0 && operator.products.map((item, index) =>
                                                         <div className='mt-3' key={index}>
-                                                            <Text className="fs-14 fw-bold">{item.ProviderCode}</Text>
                                                             <div className='row'>
                                                                 {item.price && item.price.length > 0 && item.price.map((item2, index) => {
                                                                     return (
                                                                         <Container.Column className="col-lg-4 pt-2" key={index}>
-                                                                            <div className='border border-danger price-rounded' style={{ cursor: "pointer" }} onClick={() => {setPackage(item);setPrice(item2)}}>
+                                                                            <div className='border border-danger price-rounded' style={{ cursor: "pointer" }} onClick={() => { setPackage(item); setPrice(item2) }}>
                                                                                 <div className='pt-2'>
                                                                                     <span className="mb-0"> Charges: {item2.SendValueWithOutServiceFees} USD</span>
                                                                                 </div>
@@ -201,7 +202,7 @@ const Recharge = () => {
                                                                                 <div className='mb-2'>
                                                                                     <span>Receive: {item2.ReceiveValue} {item2.ReceiveCurrencyIso}</span>
                                                                                 </div>
-                                                                                
+
                                                                             </div>
                                                                         </Container.Column>
                                                                     )
@@ -210,7 +211,7 @@ const Recharge = () => {
 
                                                         </div>
                                                     )}
-                                                    <button className='btn btn-danger mt-3 btn-block rounded-pill' onClick={() => { setshowprice(true); gotoTop()}}>Next</button>
+                                                    <button className='btn btn-danger mt-3 btn-block rounded-pill' onClick={() => { setshowprice(true); gotoTop() }}>Next</button>
                                                 </div>
                                             </div>
                                             : null}
@@ -220,7 +221,7 @@ const Recharge = () => {
                                                 <div className='row mx-auto'>
                                                     <Container.Column className="col-lg-6" >
                                                         <button className='btn btn-danger btn-block d-flex justify-content-center shadow-none' onClick={() => Toastify.Error("You must be logged in to continue purchase")}>
-                                                            <div className='bg-white rounded-circle p-1 pl-2 pr-2' style={{color: 'red'}} ><FontAwesomeIcon icon={faCreditCard} /></div>
+                                                            <div className='bg-white rounded-circle p-1 pl-2 pr-2' style={{ color: 'red' }} ><FontAwesomeIcon icon={faCreditCard} /></div>
                                                             <Text className="fs-14 my-auto pl-2">Pay with Card</Text>
                                                         </button>
                                                     </Container.Column>

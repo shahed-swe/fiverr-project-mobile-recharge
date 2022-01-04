@@ -61,8 +61,8 @@ const Home = () => {
                     <Container.Row>
                         <Container.Column>
                             <div className='text-center'>
-                                <Text className="fs-28 font-weight-bold text-white">INTERNATIONAL MOBILE RECHARGE</Text>
-                                <Text className="fs-14 text-white position-relative left">Where to sent the Top-Up</Text>
+                                <Text className="fs-28 font-weight-bold text-extra text-white">INTERNATIONAL MOBILE RECHARGE</Text>
+                                <Text className="fs-14 text-white position-relative mt-0">Where to sent the Top-Up</Text>
                             </div>
                             <div className='search-seaction d-flex justify-content-center'>
                                 <button className="input-group-text bg-danger border border-danger input-group-extra" style={{ color: "white" }}><FontAwesomeIcon icon={faGlobeAsia} /></button>
