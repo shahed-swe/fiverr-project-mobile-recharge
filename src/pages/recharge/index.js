@@ -29,6 +29,8 @@ const Recharge = () => {
     const [price, setPrice] = useState(null)
     const [showprice, setshowprice] = useState(null)
     const [packages, setPackage] = useState(null)
+    const [pricesdata, setPriceData] = useState(null)
+    const [page, setPage] = useState(6)
 
     // get country details
     const fetchCountryDetails = useCallback(async (code) => {
@@ -48,6 +50,19 @@ const Recharge = () => {
     const handleGetNumber = () => {
         setShowNumber(true)
     }
+
+    const fetchData = useCallback(async() => {
+        const data = []
+        const newpage = page + 3
+        operator && operator.products && operator.products.length > 0 && operator.products.map((item) => item.price.map((item2) => data.push(item2)))
+        setPriceData(data.splice(0, newpage))
+    }, [operator,page])
+
+    // show prices
+    useEffect(() => {
+        fetchData(6)
+    },[fetchData])
+
 
 
     const gotoTop = () => {
@@ -124,9 +139,9 @@ const Recharge = () => {
                                                                     <span className='ml-2 p-0 my-auto'>{price.ReceiveValue} USD</span>
                                                                 </div>
                                                             </div>
-                                                            {/* <div className='my-auto' onClick={() => console.log("clicked")} style={{ cursor: 'pointer' }}>
+                                                            <div className='my-auto' onClick={() => setshowprice(false)} style={{ cursor: 'pointer' }}>
                                                                 <Edit size={22} color={"red"} />
-                                                            </div> */}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div className='bg-white d-flex justify-content-between border border-danger ml-5 mr-5 p-2 mt-2 text-left'>
@@ -137,9 +152,9 @@ const Recharge = () => {
                                                                     <span className='ml-2 p-0 my-auto'>{price.ReceiveValue} {price.ReceiveCurrencyIso}</span>
                                                                 </div>
                                                             </div>
-                                                            {/* <div className='my-auto' onClick={() => console.log("clicked")} style={{ cursor: 'pointer' }}>
+                                                            <div className='my-auto' onClick={() => setshowprice(false)} style={{ cursor: 'pointer' }}>
                                                                 <Edit size={22} color={"red"} />
-                                                            </div> */}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -188,13 +203,13 @@ const Recharge = () => {
                                                 <Text className="fs-16 font-weight-bolder text-gray">Select Amount</Text>
                                                 <Text className="fs-16 font-weight-normal text-gray">{packages ? "Commission Rate:" + packages.CommissionRate + " Processing Mode:" + packages.ProcessingMode : ""}</Text>
                                                 <div className='bg-white ml-5 mr-5 p-3'>
-                                                    {operator && operator.products && operator.products.length > 0 && operator.products.map((item, index) =>
-                                                        <div className='mt-3' key={index}>
+                                                    {/* {operator && operator.products && operator.products.length > 0 && operator.products.map((item, index) => */}
+                                                        <div className='mt-3'>
                                                             <div className='row'>
-                                                                {item.price && item.price.length > 0 && item.price.map((item2, index) => {
+                                                                {pricesdata && pricesdata.length > 0 && pricesdata.map((item2, index) => {
                                                                     return (
                                                                         <Container.Column className="col-lg-4 pt-2" key={index}>
-                                                                            <div className='border border-danger price-rounded' style={{ cursor: "pointer" }} onClick={() => { setPackage(item); setPrice(item2) }}>
+                                                                            <div className='border border-danger price-rounded' style={{ cursor: "pointer" }} onClick={() => { setPrice(item2); setshowprice(true); gotoTop();}}>
                                                                                 <div className='pt-2'>
                                                                                     <span className="mb-0"> Charges: {item2.SendValueWithOutServiceFees} USD</span>
                                                                                 </div>
@@ -210,8 +225,8 @@ const Recharge = () => {
                                                             </div>
 
                                                         </div>
-                                                    )}
-                                                    <button className='btn btn-danger mt-3 btn-block rounded-pill' onClick={() => { setshowprice(true); gotoTop() }}>Next</button>
+                                                    {/* )} */}
+                                                    <button className='btn btn-danger mt-3 btn-block rounded-pill' onClick={() => { setPage(page+3);fetchData(page)}}>Next</button>
                                                 </div>
                                             </div>
                                             : null}
