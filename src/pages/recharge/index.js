@@ -58,14 +58,13 @@ const Recharge = () => {
 
     const handleGetNumber = (data) => {
         // console.log(data.phone_no)
-        console.log(isValidPhone(params.prefix+data.phone_no))
-        if (isValidPhone(params.prefix+data.phone_no) === false){
-            Toastify.Error("Invalid Phone number")
+        console.log(isValidPhone(params.prefix + data.phone_no))
+        if (isValidPhone(params.prefix + data.phone_no) === false) {
             setError("phone_no", {
                 type: "manual",
                 message: "Invalid Phone number",
             });
-        }else{
+        } else {
             setNumber(data.phone_no)
             setShowNumber(true)
 
@@ -90,7 +89,7 @@ const Recharge = () => {
         return window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 
-    
+
 
 
     return (
@@ -237,7 +236,7 @@ const Recharge = () => {
                                                 <Text className="fs-16 font-weight-bolder text-gray">Select Amount</Text>
                                                 <Text className="fs-16 font-weight-normal text-gray">{packages ? "Commission Rate:" + packages.CommissionRate + " Processing Mode:" + packages.ProcessingMode : ""}</Text>
                                                 <div className='bg-white ml-5 mr-5 p-3'>
-                                                    {/* {operator && operator.products && operator.products.length > 0 && operator.products.map((item, index) => */}
+
                                                     <div className='mt-3'>
                                                         <div className='row'>
                                                             {pricesdata && pricesdata.length > 0 && pricesdata.map((item2, index) => {
@@ -259,7 +258,7 @@ const Recharge = () => {
                                                         </div>
 
                                                     </div>
-                                                    {/* )} */}
+
                                                     <button className='btn btn-danger mt-3 btn-block rounded-pill' onClick={() => { setPage(page + 3); fetchData(page) }}>Next</button>
                                                 </div>
                                             </div>
