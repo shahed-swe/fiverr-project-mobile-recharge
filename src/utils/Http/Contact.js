@@ -18,5 +18,4 @@ const Contact = {
     ContactUs
 }
 
-
 export default Contact

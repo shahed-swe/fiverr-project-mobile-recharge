@@ -4,6 +4,7 @@ import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { DangerButton } from '../button/index';
 import { NavLink, useHistory } from 'react-router-dom'
 import { Link } from 'react-router-dom';
+import { User } from 'react-feather'
 import './style.scss'
 
 
@@ -55,6 +56,11 @@ export const Navbar = () => {
                             <div className="nav-link pl-4 pr-4 text-white"><span className='text-white'>Contact Us</span> </div>
                         </DangerButton>
                         </Link>
+                        {loggedin ? 
+                            <Link className="nav-item ml-3 mt-1" to="/">
+                                <User size={28} color='black'/>
+                            </Link>
+                        : null}
                     </ul>
                 </div>
             </div>

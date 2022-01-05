@@ -39,9 +39,9 @@ const Login = () => {
             }
             const response = await Requests.Authentication.Login(body)
             if (response.data && response.status === 200) {
-
+                console.log(data)
                 localStorage.setItem('token', response.data.user.token)
-                
+                localStorage.setItem('email', data.email)
                 history.push('/')
             }
         } catch (error) {
