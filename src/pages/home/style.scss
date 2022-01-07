@@ -40,17 +40,17 @@ $smalldevice: 790px;
     top: 24%;
     left: 11%;
     @include respond(mobile) {
-        top: 14% !important;
+        top: 10% !important;
         left: 0%
     }
     @include respond(tablet) {
         left: 0%;
     }
     @include respond(laptopsmall) {
-        left: 0%;
+        left: 2%;
     }
     @include respond(laptopbig) {
-        left: 0%;
+        left: 2%;
     }
     .text-extra {
         @include respond(mobile) {

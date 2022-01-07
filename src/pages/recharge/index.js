@@ -37,6 +37,7 @@ const Recharge = () => {
     // get country details
     const fetchCountryDetails = useCallback(async (code) => {
         const response = await Requests.CountryApi.CountryWiseInformation(code)
+        console.log(response)
         if (response.status === 200) {
             setData(response.data.providers)
         }
@@ -128,8 +129,8 @@ const Recharge = () => {
                                             {operator ?
                                                 <div className='bg-white row border border-danger ml-5 mr-5 p-2 mt-2 text-left'>
                                                     <Text className="font-weight-bold fs-14 my-auto p-2 col-4">Operator: </Text>
-                                                    <div className='d-flex justify-content-between col-8'>
-                                                        <div>
+                                                    <div className='d-flex justify-content-between col-lg-8 col-md-12'>
+                                                        <div className='d-flex justify-content-start'>
                                                             <img src={operator.LogoUrl} alt="" className='rounded-circle' style={{ height: "35px", width: "35px" }} />
                                                             <span className='ml-2 p-0'>{operator.Name}</span>
                                                         </div>
@@ -139,15 +140,15 @@ const Recharge = () => {
                                                     </div>
                                                 </div> : null}
                                             {showNumber ?
-                                                <div className='bg-white d-flex justify-content-between border border-danger ml-5 mr-5 p-2 mt-2 text-left'>
+                                                <div className='bg-white row border border-danger ml-5 mr-5 p-2 mt-2 text-left'>
                                                     <Text className="font-weight-bold fs-14 my-auto p-2 col-4">Number: </Text>
-                                                    <div className="d-flex justify-content-between col-8">
-                                                        <div className="d-flex justify-content-start">
+                                                    <div className="d-flex justify-content-between col-lg-8 col-md-12">
+                                                        <div className="d-flex justify-content-start ">
                                                             <div className="rounded-circle border border-danger p-2">
                                                                 <Phone size={22} color={"red"} />
                                                             </div>
                                                             <div className='my-auto'>
-                                                                <span className='ml-2 p-0 my-auto'>+{params.prefix} | {number}</span>
+                                                                <span className='ml-2 p-0 my-auto'>+{params.prefix} | <span className='number-prefix'>{number}</span></span>
                                                             </div>
                                                         </div>
                                                         <div className='my-auto' onClick={() => { setShowNumber(false); setshowprice(false) }} style={{ cursor: 'pointer' }}>
@@ -210,25 +211,25 @@ const Recharge = () => {
                                         {operator && !showNumber ?
                                             <div className='text-center pt-2'>
                                                 <Text className="fs-16 font-weight-bolder text-gray">Where to send the Top-Up?</Text>
-                                                <div className='bg-white ml-5 mr-5 p-3'>
-                                                    <div className='row mx-auto'>
+                                                <div className='bg-white ml-5'>
+                                                    <div className='row mr-5'>
                                                         {errors.phone_no && errors.phone_no.message ?
                                                             <Text className="text-danger fs-13 mb-1">{errors.phone_no && errors.phone_no.message}</Text> :
                                                             null
                                                         }
-                                                        <form className="input-group mb-3 " onSubmit={handleSubmit(handleGetNumber)}>
+                                                        <form className="input-group mb-3" onSubmit={handleSubmit(handleGetNumber)}>
 
                                                             <div className="input-group-prepend">
-                                                                <span className="input-group-text bg-danger m-0" id="basic-addon1"><span className={`flag-icon bg-white p-1 pl-2 pr-2 rounded-circle flag-icon-${params.code.toLowerCase()}`}></span></span>
+                                                                <span className="input-group-text bg-danger m-0" id="basic-addon1"><span className={`flag-icon bg-white p-1 pl-2 rounded-circle flag-icon-${params.code.toLowerCase()}`}></span></span>
                                                             </div>
                                                             <span className="prefix my-auto">+{params.prefix}</span>
-                                                            <input type="text" className={errors.phone_no ? "form-control shadow-none error extra-input pl-5 p-3 border border-danger" : "form-control shadow-none extra-input pl-5 p-3 border border-danger"}
+                                                            <input type="text" className={errors.phone_no ? "form-control shadow-none error extra-input pl-5 border border-danger" : "form-control shadow-none extra-input pl-5 border border-danger"}
                                                                 placeholder='Enter Phone number'
                                                                 {...register("phone_no", {
                                                                     required: "Phone number is required",
                                                                 })}
                                                             />
-                                                            <DangerButton>Submit</DangerButton>
+                                                            <DangerButton className="ml-0">Submit</DangerButton>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -244,7 +245,7 @@ const Recharge = () => {
                                                         <div className='row'>
                                                             {pricesdata && pricesdata.length > 0 && pricesdata.map((item2, index) => {
                                                                 return (
-                                                                    <Container.Column className="col-lg-4 pt-2" key={index}>
+                                                                    <Container.Column className="col-lg-4 col-md-4 pt-2" key={index}>
                                                                         <div className='border border-danger price-rounded' style={{ cursor: "pointer" }} onClick={() => { setPrice(item2); setshowprice(true); gotoTop(); }}>
                                                                             <div className='pt-2'>
                                                                                 <span className="mb-0"> Charges: {item2.SendValueWithOutServiceFees} USD</span>
@@ -268,20 +269,20 @@ const Recharge = () => {
                                             : null}
                                         {showprice ? <div className='text-center pt-2'>
                                             <Text className="fs-16 font-weight-bolder text-gray mt-2 mb-0">Payment Method</Text>
-                                            <div className='bg-white ml-5 mr-5 p-3'>
-                                                <div className='row mx-auto'>
-                                                    <Container.Column className="col-lg-6" >
+                                            <div className='bg-white'>
+                                                <div className="mx-auto d-flex justify-content-around">
+                                                    <div className='col-6'>
                                                         <button className='btn btn-danger btn-block d-flex justify-content-center shadow-none' onClick={() => handlePaymentGateway("card")}>
                                                             <div className='bg-white rounded-circle p-1 pl-2 pr-2' style={{ color: 'red' }} ><FontAwesomeIcon icon={faCreditCard} /></div>
                                                             <Text className="fs-14 my-auto pl-2">Pay with Card</Text>
                                                         </button>
-                                                    </Container.Column>
-                                                    <Container.Column className="col-lg-6" >
+                                                    </div>
+                                                    <div className='col-6'>
                                                         <button className='btn btn-outline-danger btn-block d-flex justify-content-center shadow-none' onClick={() => handlePaymentGateway("paypal")}>
                                                             <div className='bg-white rounded-circle p-1 pl-2 pr-2' style={{ color: 'red' }} ><FontAwesomeIcon icon={faPaypal} /></div>
                                                             <Text className="fs-14 my-auto pl-2">Pay with PayPal</Text>
                                                         </button>
-                                                    </Container.Column>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div> : null}

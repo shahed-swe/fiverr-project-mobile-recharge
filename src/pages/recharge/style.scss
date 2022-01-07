@@ -20,3 +20,9 @@
     border-top-right-radius: 10px !important;
     border-bottom-left-radius: 10px !important;
 }
+
+.number-prefix {
+    @media (max-width: 450px) {
+        padding-left: 10px;
+    }
+}
