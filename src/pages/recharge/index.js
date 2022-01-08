@@ -158,7 +158,7 @@ const Recharge = () => {
                                             <div className='bg-white country-sec row border border-danger ml-5 mr-5 p-2 text-left'>
                                                 <Text className="font-weight-bold fs-14 my-auto p-2 col-4">Country:</Text>
                                                 <div className='d-flex justify-content-between col-lg-8 col-md-12'>
-                                                    <div className='d-flex justify-content-start'>
+                                                    <div className='d-flex justify-content-between'>
                                                         <span className={`flag-icon pl-3 pr-3 p-2 border border-danger rounded-circle flag-icon-${params.code.toLowerCase()}`}> </span>
                                                         <span className='my-auto ml-2'>{params.name}</span>
                                                     </div>
@@ -174,7 +174,7 @@ const Recharge = () => {
                                                 <div className='bg-white row border border-danger ml-5 mr-5 p-2 mt-2 text-left'>
                                                     <Text className="font-weight-bold fs-14 my-auto p-2 col-4">Operator: </Text>
                                                     <div className='d-flex justify-content-between col-lg-8 col-md-12'>
-                                                        <div className='d-flex justify-content-start'>
+                                                        <div className='d-flex justify-content-between'>
                                                             <img src={operator.LogoUrl} alt="" className='rounded-circle' style={{ height: "35px", width: "35px" }} />
                                                             <span className='ml-2 p-0'>{operator.Name}</span>
                                                         </div>
@@ -205,7 +205,7 @@ const Recharge = () => {
                                                     <div className='bg-white row border border-danger ml-5 mr-5 p-2 mt-2 text-left'>
                                                         <Text className="font-weight-bold fs-14 my-auto col-4">Received Value: </Text>
                                                         <div className="d-flex justify-content-between col-lg-8 col-md-12">
-                                                            <div className="d-flex justify-content-start">
+                                                            <div className="d-flex justify-content-between">
                                                                 <div className='my-auto'>
                                                                     <span className='p-0 my-auto'>{price.ReceiveValue} USD</span>
                                                                 </div>
@@ -218,7 +218,7 @@ const Recharge = () => {
                                                     <div className='bg-white row border border-danger ml-5 mr-5 p-2 mt-2 text-left'>
                                                         <Text className="font-weight-bold fs-14 my-auto col-4">Received Value: </Text>
                                                         <div className="d-flex justify-content-between col-lg-8 col-md-12">
-                                                            <div className="d-flex justify-content-start">
+                                                            <div className="d-flex justify-content-between">
                                                                 <div className='my-auto'>
                                                                     <span className='p-0 my-auto'>{price.ReceiveValue} {price.ReceiveCurrencyIso}</span>
                                                                 </div>
