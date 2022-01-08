@@ -1,4 +1,64 @@
+$laptop1440: 1450px;
+$laptop1030: 1030px;
+$tablet: 770px;
+$smalldevice: 790px;
+// partisions
+@mixin respond ($breakpoint) {
+    @if $breakpoint==mobile {
+        @media only screen and (max-width: 480px) {
+            @content;
+        }
+    }
+    @if $breakpoint==tablet {
+        @media only screen and (max-width: $tablet) {
+            @content;
+        }
+    }
+    @if $breakpoint==laptopsmall {
+        @media only screen and (max-width: $laptop1030) {
+            @content;
+        }
+    }
+    @if $breakpoint==laptopbig {
+        @media only screen and (max-width: $laptop1440) {
+            @content;
+        }
+    }
+    @if $breakpoint==smalldevice {
+        @media only screen and (max-height: $smalldevice) {
+            @content;
+        }
+    }
+}
+
+.country-name {
+    @include respond(mobile) {
+        font-size: 12px !important;
+    }
+}
+
+.extra-button-two {
+    position: relative;
+    @media only screen and (min-width: 220px) {
+        top: -13px;
+        left: -26px;
+    }
+    @media only screen and (min-width: 321px) {
+        top: -10px;
+        left: 0px;
+    }
+    @media only screen and (min-width: 376px) {
+        top: 0px;
+        left: 0px;
+    }
+}
+
 .country-sec {
+    // border-bottom-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.country-sec-two {
     border-bottom-right-radius: 15px;
     border-top-left-radius: 15px;
 }
@@ -11,9 +71,9 @@
 
 .extra-input {
     position: relative;
-    left: -32px;
-    border-top-right-radius: 10px !important;
-    border-bottom-right-radius: 10px !important;
+    left: -36px;
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
 }
 
 .price-rounded {
@@ -25,4 +85,13 @@
     @media (max-width: 450px) {
         padding-left: 10px;
     }
+}
+
+.extra-btn {
+    margin-top: 10px;
+    margin-right: 2.2rem !important;
+}
+
+.extra-pass-two {
+    border-bottom-left-radius: 10px !important;
 }

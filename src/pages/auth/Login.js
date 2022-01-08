@@ -42,7 +42,13 @@ const Login = () => {
                 console.log(data)
                 localStorage.setItem('token', response.data.user.token)
                 localStorage.setItem('email', data.email)
-                history.push('/')
+                const get = JSON.parse(localStorage.getItem('get'))
+                if (get === true) {
+                    history.push(`/recharge/${localStorage.getItem('operator')}`)
+                }
+                else {
+                    history.push('/')
+                }
             }
         } catch (error) {
             if (error) {
@@ -67,7 +73,7 @@ const Login = () => {
                                     register={register}
                                 />
                             </div>
-                            
+
                         </Container.Column>
                     </Container.Basic>
 
