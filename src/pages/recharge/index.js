@@ -176,7 +176,7 @@ const Recharge = () => {
                                                     <div className='d-flex justify-content-between col-lg-8 col-md-12'>
                                                         <div className='d-flex justify-content-between'>
                                                             <img src={operator.LogoUrl} alt="" className='rounded-circle' style={{ height: "35px", width: "35px" }} />
-                                                            <span className='ml-2 p-0'>{operator.Name}</span>
+                                                            <span className='ml-2 p-0 my-auto'>{operator.Name}</span>
                                                         </div>
                                                         <div className='my-auto' onClick={() => { setOperator(null); setShowNumber(false); setshowprice(false) }} style={{ cursor: 'pointer' }}>
                                                             <Edit size={22} color={"red"} />
