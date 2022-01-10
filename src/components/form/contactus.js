@@ -12,15 +12,6 @@ export const ContactUsForm = (props) => {
 
     return (
         <Card.Simple className="shadow-none border border-danger p-4">
-            <Card.Header className="bg-white px-0 text-center border-0">
-                <Text className="fs-20 font-weight-bolder mb-1">Sign In</Text>
-                <div>
-                    Already Have an account?
-                    <Link to="/login">
-                        <span className="fs-16 text-bold text-dark "> Login</span>
-                    </Link>
-                </div>
-            </Card.Header>
             <Card.Body className="px-0">
                 <form onSubmit={handleSubmit(onSubmit)}>
 

@@ -7,7 +7,7 @@ import { Navbar } from '../../components/navbar/index'
 import { Footer } from '../../components/footer/index'
 import { Text } from '../../components/text/Text'
 // styles
-import './style.scss'
+import './styles.scss'
 // images
 import FrontImage from '../../assets/first-section-back.jpg'
 // fontawesome
@@ -66,7 +66,7 @@ const Home = () => {
             <Navbar />
             <div className='home-section'>
                 <img src={FrontImage} className='img-fluid' alt="" />
-                <Container.Basic className='home-section__inside'>
+                <Container.Basic className='home-section__inside-home'>
                     <Container.Row>
                         <Container.Column>
                             <div className='text-center'>
