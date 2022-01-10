@@ -30,9 +30,10 @@ const Home = () => {
     // fetching country list
     const fetchCountryList = useCallback(async () => {
         const response = await Requests.CountryApi.CountryList()
+        console.log(response)
         if (response.data && response.status === 200) {
             const data = response.data.map(item => {
-                return { label: <div className='d-flex justify-content-start'><span className={`flag-icon rounded-circle flag-icon-${item.CountryIso.toLowerCase()}`}></span><span className='pl-2'>{`+ ${item.InternationalDialingInformations[0].Prefix}  ${item.CountryIso}`}</span></div>, value: item.CountryIso, name: item.CountryName, prefix: item.InternationalDialingInformations[0].Prefix };
+                return { label: <div className='d-flex justify-content-start'><span className={`flag-icon rounded-circle flag-icon-${item.CountryIso.toLowerCase()}`}></span><span className='pl-2'>{`+ ${item.InternationalDialingInformations[0].Prefix}  ${item.CountryName}`}</span></div>, value: item.CountryName,iso: item.CountryIso, name: item.CountryName, prefix: item.InternationalDialingInformations[0].Prefix };
             });
             setData(data)
         }
@@ -45,8 +46,16 @@ const Home = () => {
 
     // handle Selected country
     const  handleSelect = () => {
+        localStorage.removeItem('data')
+        localStorage.removeItem('price')
+        localStorage.removeItem('number')
+        localStorage.removeItem('operatordata')
+        localStorage.removeItem('showprice')
+        localStorage.removeItem('pricesdata')
+        localStorage.removeItem('showNumber')
+        localStorage.removeItem('showMessage')
         if(country){
-            history.push(`/recharge/${country.value}/${country.name}/${country.prefix}`)
+            history.push(`/recharge/${country.iso}/${country.name}/${country.prefix}`)
         }else{
             Toastify.Error("Please Select a country")
         }

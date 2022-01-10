@@ -13,6 +13,8 @@ import Reset from './pages/auth/Reset'
 import Home from './pages/home/index'
 import Recharge from './pages/recharge';
 import ResetPass from './pages/auth/ResetPass'
+import Invoice from './pages/Invoice/index';
+import InvoiceError from './pages/Invoice/error';
 
 // extra components
 import ScrollToTop from './components/scrollTop/index';
@@ -34,6 +36,8 @@ const App = () => {
             <Route exact path="/resetpass" component={ResetPass}/>
             <Route exact path="/contactus" component={ContactUs}/>
             <Route exact path="/recharge/:code/:name/:prefix" component={Recharge}/>
+            <Route excat path="/invoice" component={Invoice}/>
+            <Route excat path="/invoice-error" component={InvoiceError}/>
           </Switch>
         </ScrollToTop>
       </Router>

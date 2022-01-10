@@ -112,7 +112,13 @@ const Recharge = () => {
 
 
     const handlePaymentGateway = (value) => {
+        
         if(isLoggedin()){
+            if (value === "card") {
+                history.push('/invoice')
+            } else {
+                history.push('/invoice-error')
+            }
             Toastify.Success("Successfully Purchased")
             localStorage.removeItem('data')
             localStorage.removeItem('price')
@@ -282,6 +288,7 @@ const Recharge = () => {
                                         {showNumber && !showprice ?
                                             <div className='text-center pt-2'>
                                                 <Text className="fs-16 font-weight-bolder text-gray">Select Amount</Text>
+                                                {operator && !operator.products[0].PromotionDescPromotionType? <Text className="fs-16 font-weight-normal text-gray">No Promotional Message Available</Text> : null}
                                                 {!showMessage ? 
                                                 <Text className="fs-16 font-weight-normal text-gray" ><span style={{cursor:'pointer'}} onClick={() => setShowMessage(true)}>{operator && operator.products ? operator.products[0].PromotionDescPromotionType : null}</span></Text>:
                                                     <Text className="fs-16 font-weight-normal text-gray " ><span className='text-align-justify' style={{ cursor: 'pointer' }} onClick={() => setShowMessage(false)}>{operator && operator.products ? operator.products[0].PromotionDescTermAndCondition : null}</span></Text>}
