@@ -326,14 +326,14 @@ const Recharge = () => {
                                                 <div className="mx-auto d-flex justify-content-around">
                                                     <div className='col-6'>
                                                         <button className='btn btn-danger btn-block d-flex justify-content-center shadow-none' onClick={() => handlePaymentGateway("card")}>
-                                                            <div className='bg-white rounded-circle p-1 pl-2 pr-2' style={{ color: 'red' }} ><FontAwesomeIcon icon={faCreditCard} /></div>
-                                                            <Text className="fs-14 my-auto pl-2">Pay with Card</Text>
+                                                            <div className='bg-white rounded-circle p-1 pl-2 pr-2 my-auto' style={{ color: 'red' }} ><FontAwesomeIcon icon={faCreditCard} /></div>
+                                                            <Text className="fs-14 my-auto pl-2 extra-take-button">Pay with Card</Text>
                                                         </button>
                                                     </div>
                                                     <div className='col-6'>
                                                         <button className='btn btn-outline-danger btn-block d-flex justify-content-center shadow-none' onClick={() => handlePaymentGateway("paypal")}>
-                                                            <div className='bg-white rounded-circle p-1 pl-2 pr-2' style={{ color: 'red' }} ><FontAwesomeIcon icon={faPaypal} /></div>
-                                                            <Text className="fs-14 my-auto pl-2">Pay with PayPal</Text>
+                                                            <div className='bg-white rounded-circle p-1 pl-2 pr-2 my-auto' style={{ color: 'red' }} ><FontAwesomeIcon icon={faPaypal} /></div>
+                                                            <Text className="fs-14 my-auto pl-2 extra-take-button">Pay with PayPal</Text>
                                                         </button>
                                                     </div>
                                                 </div>
