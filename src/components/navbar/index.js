@@ -68,7 +68,7 @@ export const Navbar = () => {
                     </ul>
                 </div>
                 {/* Menu button */}
-                <div className="elements-container d-xl-none ms-auto">
+                <div className="elements-container d-xl-none d-lg-none  ms-auto">
                     <GrayButton className="btn-circle" onClick={() => setShow(!show)}>
                         <Menu className="text-dark" size={20} />
                     </GrayButton>

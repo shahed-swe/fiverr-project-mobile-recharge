@@ -38,7 +38,9 @@ export const Footer = (props) => {
                             </ul>
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-12">
-                            <img src={FooterImage} className='img-fluid footer-image__size' alt="" />
+                            <div className='text-center'>
+                                <img src={FooterImage} className='img-fluid footer-image__size ' alt="" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -50,8 +52,8 @@ export const Footer = (props) => {
                             </div>
                         </div>
                         <div className="col-lg-6">
-                            <div className="input-group">
-                                <input type="text" className="form-control col-8 shadow-none rounded-pill input-extra-design" placeholder="Email here" aria-label="Example text with button addon" aria-describedby="button-addon1" />
+                            <div className="input-group ml-4">
+                                <input type="text" className="form-control col-8 shadow-none rounded-pill input-extra-design mx-auto" placeholder="Email here" aria-label="Example text with button addon" aria-describedby="button-addon1" />
                                 <div className="input-group-prepend bg-danger button-extra-style extra-rounded">
                                     <div className="button-extra-style__inside text-white border-0 shadow-none pt-1" type="button" id="button-addon1">Send</div>
                                 </div>
@@ -82,8 +84,8 @@ export const Footer = (props) => {
                         </ul>
                         <form className="form-inline my-2 my-lg-0">
                             <div className="footer-image">
-                                <img src={Store} className='img-fluid' alt="" width={160} height={50}/>
-                                <img src={Group} className='img-fluid' alt="" width={160} height={50}/>
+                                <img src={Store} className='img-fluid' alt="" width={160} height={50} />
+                                <img src={Group} className='img-fluid' alt="" width={160} height={50} />
                             </div>
                         </form>
                     </div>
