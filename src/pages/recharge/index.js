@@ -247,7 +247,7 @@ const Recharge = () => {
                                                     <div className='row'>
                                                         {data && data.map((item, index) => {
                                                             return (
-                                                                <div className='col-3 col-sm-4 col-xs-6 my-auto p-0 pb-2 pl-1 pr-1' style={{ cursor: "pointer" }} onClick={() => setOperator(item)} key={index}>
+                                                                <div className='col-3 col-sm-4 col-xs-6 my-auto p-0 pb-2 pl-1 pr-1 operator-hover' style={{ cursor: "pointer" }} onClick={() => setOperator(item)} key={index}>
                                                                     <div className='w-100'>
                                                                         <img src={item.LogoUrl} alt="" width={120} height={120} className='img-fluid ' />
                                                                     </div>
@@ -298,7 +298,7 @@ const Recharge = () => {
                                                         <div className='row'>
                                                             {pricesdata && pricesdata.length > 0 && pricesdata.map((item2, index) => {
                                                                 return (
-                                                                    <Container.Column className="col-lg-4 col-md-4 pt-2" key={index}>
+                                                                    <Container.Column className="col-lg-4 col-md-4 pt-2 price-hover" key={index}>
                                                                         <div className='border border-danger price-rounded' style={{ cursor: "pointer" }} onClick={() => { setPrice(item2); setshowprice(true); gotoTop(); }}>
                                                                             <div className='pt-2'>
                                                                                 <span className="mb-0"> Charges: {item2.SendValueWithOutServiceFees} USD</span>
