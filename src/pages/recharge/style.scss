@@ -100,3 +100,18 @@ $smalldevice: 790px;
 //         display: none;
 //     }
 // }
+.operator-hover {
+    transition: transform 0.5s;
+}
+
+.operator-hover:hover {
+    transform: scale(1.2);
+}
+
+.price-hover {
+    transition: transform 0.5s;
+}
+
+.price-hover:hover {
+    transform: scale(1.1);
+}
