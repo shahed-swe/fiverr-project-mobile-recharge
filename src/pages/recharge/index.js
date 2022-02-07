@@ -21,6 +21,7 @@ import { Requests } from '../../utils/Http'
 import { Container } from '../../components/container'
 import { DangerButton } from '../../components/button'
 import { Toastify } from '../../components/toastify/Toastify'
+import Axios from 'axios'
 
 
 const Recharge = () => {
@@ -39,7 +40,7 @@ const Recharge = () => {
     const [showNumber, setShowNumber] = useState(false)
     const [showMessage, setShowMessage] = useState(false)
 
-    
+
 
 
     // get country details
@@ -108,18 +109,64 @@ const Recharge = () => {
         setPriceData(JSON.parse(localStorage.getItem('pricesdata')))
         setShowNumber(JSON.parse(localStorage.getItem('showNumber')))
         setShowMessage(JSON.parse(localStorage.getItem('showMessage')))
-    },[])
+    }, [])
 
 
     const handlePaymentGateway = (value) => {
-        
-        if(isLoggedin()){
+
+        if (isLoggedin()) {
             if (value === "card") {
-                history.push('/invoice')
+                let windowName = 'w_' + Date.now() + Math.floor(Math.random() * 100000).toString();
+                var form = document.createElement("form");
+                form.setAttribute("method", "POST");
+                form.setAttribute("action", "https://bexwal.wa.bwx.walbex.com/api/process/stripe/create-checkout-session");
+
+                form.setAttribute("target", windowName);
+
+                var skucode = document.createElement("input");
+                skucode.setAttribute("type", "hidden");
+                skucode.setAttribute("name", "SkuCode");
+                skucode.setAttribute("value", "BHETET55310");
+                form.appendChild(skucode)
+                
+                var SendValue = document.createElement("input");
+                SendValue.setAttribute("type", "hidden");
+                SendValue.setAttribute("name", "SendValue");
+                SendValue.setAttribute("value", price.SendValue);
+                form.appendChild(SendValue)
+                
+                var ChargeValue = document.createElement("input");
+                ChargeValue.setAttribute("type", "hidden");
+                ChargeValue.setAttribute("name", "ChargeValue");
+                ChargeValue.setAttribute("value", price.SendValueWithOutServiceFees);
+                form.appendChild(ChargeValue)
+                
+                var SendCurrencyIso = document.createElement("input");
+                SendCurrencyIso.setAttribute("type", "hidden");
+                SendCurrencyIso.setAttribute("name", "SendCurrencyIso");
+                SendCurrencyIso.setAttribute("value", params.code);
+                form.appendChild(SendCurrencyIso)
+                
+                var AccountNumber = document.createElement("input");
+                AccountNumber.setAttribute("type", "hidden");
+                AccountNumber.setAttribute("name", "AccountNumber");
+                AccountNumber.setAttribute("value", number);
+                form.appendChild(AccountNumber)
+
+                document.body.appendChild(form);
+                console.log(form)
+
+                // window.open('', windowName);
+
+                form.submit();
+
+
+
+                // history.push('/invoice')
             } else {
-                history.push('/invoice-error')
+                // history.push('/invoice-error')
             }
-            Toastify.Success("Successfully Purchased")
+            // Toastify.Success("Successfully Purchased")
             localStorage.removeItem('data')
             localStorage.removeItem('price')
             localStorage.removeItem('number')
@@ -128,10 +175,10 @@ const Recharge = () => {
             localStorage.removeItem('pricesdata')
             localStorage.removeItem('showNumber')
             localStorage.removeItem('showMessage')
-            window.location.reload()
-        }else{
-            localStorage.setItem('get',true)
-            localStorage.setItem('operator', params.code+'/'+params.name+'/'+params.prefix)
+            // window.location.reload()
+        } else {
+            localStorage.setItem('get', true)
+            localStorage.setItem('operator', params.code + '/' + params.name + '/' + params.prefix)
             localStorage.setItem('data', JSON.stringify(data))
             localStorage.setItem('price', JSON.stringify(price));
             localStorage.setItem('number', JSON.stringify(number))
@@ -140,9 +187,9 @@ const Recharge = () => {
             localStorage.setItem('pricesdata', JSON.stringify(pricesdata))
             localStorage.setItem('showNumber', JSON.stringify(showNumber))
             localStorage.setItem('showMessage', JSON.stringify(showMessage))
-            history.push('/login')
+            // history.push('/login')
         }
-        
+
     }
 
 
@@ -213,7 +260,7 @@ const Recharge = () => {
                                                         <div className="d-flex justify-content-between col-lg-8 col-md-12">
                                                             <div className="d-flex justify-content-between">
                                                                 <div className='my-auto'>
-                                                                    <span className='p-0 my-auto'>{price.ReceiveValue} USD</span>
+                                                                    <span className='p-0 my-auto'>{price.SendValueWithOutServiceFees} USD</span>
                                                                 </div>
                                                             </div>
                                                             <div className='my-auto' onClick={() => setshowprice(false)} style={{ cursor: 'pointer' }}>
@@ -288,9 +335,9 @@ const Recharge = () => {
                                         {showNumber && !showprice ?
                                             <div className='text-center pt-2'>
                                                 <Text className="fs-16 font-weight-bolder text-gray">Select Amount</Text>
-                                                {operator && !operator.products[0].PromotionDescPromotionType? <Text className="fs-16 font-weight-normal text-gray">No Promotional Message Available</Text> : null}
-                                                {!showMessage ? 
-                                                <Text className="fs-16 font-weight-normal text-gray" ><span style={{cursor:'pointer'}} onClick={() => setShowMessage(true)}>{operator && operator.products ? operator.products[0].PromotionDescPromotionType : null}</span></Text>:
+                                                {operator && !operator.products[0].PromotionDescPromotionType ? <Text className="fs-16 font-weight-normal text-gray">No Promotional Message Available</Text> : null}
+                                                {!showMessage ?
+                                                    <Text className="fs-16 font-weight-normal text-gray" ><span style={{ cursor: 'pointer' }} onClick={() => setShowMessage(true)}>{operator && operator.products ? operator.products[0].PromotionDescPromotionType : null}</span></Text> :
                                                     <Text className="fs-16 font-weight-normal text-gray " ><span className='text-align-justify' style={{ cursor: 'pointer' }} onClick={() => setShowMessage(false)}>{operator && operator.products ? operator.products[0].PromotionDescTermAndCondition : null}</span></Text>}
                                                 <div className='bg-white ml-5 mr-5 p-3'>
 
